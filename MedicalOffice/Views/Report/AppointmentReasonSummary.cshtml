@@ -1,0 +1,54 @@
+﻿@model IEnumerable<MedicalOffice.ViewModels.AppointmentReasonSummaryVM>
+
+@{
+    ViewData["Title"] = "Appointment Reason Summary";
+}
+
+<h2>Summary of Reasons for Appointments</h2>
+
+<form asp-controller="Report" asp-action="AppointmentReasonSummary" method="get">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReasonName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NumberOfAppointments)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AverageAge)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TotalExtraFees)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MaximumFeeCharged)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReasonName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumberOfAppointments)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AverageAge)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalExtraFees)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaximumFeeCharged)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <partial name="_PagingNavBar" />
+</form>

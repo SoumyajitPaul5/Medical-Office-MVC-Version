@@ -1,0 +1,189 @@
+﻿@model IEnumerable<MedicalOffice.Models.Patient>
+
+<partial name="_ViewHeading" />
+
+<form asp-action="Index" method="get">
+    <input type="hidden" name="sortDirection" value="@ViewData["sortDirection"]" />
+    <input type="hidden" name="sortField" value="@ViewData["sortField"]" />
+    <div class="form-horizontal">
+        <button class="btn @ViewData["Filtering"]" type="button" data-bs-toggle="collapse" id="filterToggle" data-bs-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter">
+            Filter/Search @ViewData["numberFilters"]
+        </button><br />
+        <div class="collapse @ViewData["ShowFilter"]" id="collapseFilter">
+            <div class="card card-body bg-light">
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Select by Doctor:</label>
+                        @Html.DropDownList("DoctorID", null, "All Doctors", htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Filter by Medical Trial:</label>
+                        @Html.DropDownList("MedicalTrialID", null, "None", htmlAttributes: new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Filter by Condition:</label>
+                            @Html.DropDownList("ConditionID", null, "All Conditions", htmlAttributes: new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Search Patient Name:</label>
+                        @Html.TextBox("SearchString", null, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group col-md-4 align-self-end">
+                        <input type="submit" name="actionButton" value="Filter" class="btn btn-outline-primary" />
+                        <a asp-action="Index" class="btn btn-outline-dark">Clear</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>
+                    <input type="submit" name="actionButton" value="Patient" class="btn btn-link" />
+                </th>
+                <th class="d-none d-md-table-cell">
+                    <input type="submit" name="actionButton" value="Age" class="btn btn-link" />
+                </th>
+                <th class="d-none d-lg-table-cell">
+                    <input type="submit" name="actionButton" value="Visits/Yr" class="btn btn-link" />
+                </th>
+                <th class="d-none d-xl-table-cell">
+                    <input type="submit" value="Medical Trial" class="btn btn-toolbar" />
+                </th>
+                <th class="d-none d-xxl-table-cell">
+                    <input type="submit" value="History" class="btn btn-toolbar" />
+                </th>
+                <th>
+                    <input type="submit" name="actionButton" value="Doctor" class="btn btn-link" />
+                </th>
+                @if (User.IsInRole("Admin") || User.IsInRole("Supervisor"))
+                {
+                    <th class="text-center" style="min-width:120px">
+                        <a asp-action="Create" class="btn btn-sm btn-outline-success"
+                           role="button" data-bs-toggle="tooltip" title="Create New @ViewData["ControllerFriendlyName"]">
+                            <strong>&#x270D; Create</strong>
+                        </a>
+                    </th>
+                }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @{
+                            if (item.PatientThumbnail?.Content != null)
+                            {
+                                string imageBase64 = Convert.ToBase64String(item.PatientThumbnail.Content);
+                                string imageSrc = string.Format("data:" + item.PatientThumbnail.MimeType + ";base64,{0}", imageBase64);
+                                <img src="@imageSrc" alt="Profile Picture of @item.FullName" title="Profile Picture of @item.FullName" class="img-fluid rounded" />
+                            }
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FormalName)
+                    </td>
+                    <td class="d-none d-md-table-cell">
+                        @Html.DisplayFor(modelItem => item.Age)
+                    </td>
+                    <td class="d-none d-lg-table-cell">
+                        @Html.DisplayFor(modelItem => item.ExpYrVisits)
+                    </td>
+                    <td class="d-none d-xl-table-cell">
+                        @{
+                            if (item.MedicalTrialID != null)
+                            {
+                                <a href="#" data-bs-toggle="tooltip" title="@item.MedicalTrial.TrialName">Yes</a>
+                            }
+                            else
+                            {
+                                @:No
+                            }
+                        }
+                    </td>
+                    <td class="d-none d-xxl-table-cell">
+                        @{
+                            int condCount = item.PatientConditions.Count;
+                            if (condCount > 0)
+                            {
+                                string firstCond = item.PatientConditions.FirstOrDefault().Condition.ConditionName;
+                                if (condCount > 1)
+                                {
+                                    string condList = "";
+                                    var c = item.PatientConditions.ToList();
+                                    for (int i = 1; i < condCount; i++)
+                                    {
+                                        condList += c[i].Condition.ConditionName + " <br />";
+                                    }
+                                    <a class="" role="button" data-bs-toggle="collapse" href="#collapseHistory@(item.ID)"
+                                       aria-expanded="false" aria-controls="collapseHistory@(item.ID)">
+                                        @firstCond <span class="badge bg-info">@condCount</span>
+                                    </a>
+                                    <div class="collapse" id="collapseHistory@(item.ID)">
+                                        @Html.Raw(condList)
+                                    </div>
+                                }
+                                else
+                                {
+                                    @firstCond
+                                }
+                            }
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Doctor.FullName)
+                    </td>
+                    @{
+                        if (User.IsInRole("Supervisor"))
+                        {
+                            <td class="text-center">
+                                <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-sm btn-outline-primary"
+                                   role="button" data-bs-toggle="tooltip" title="Edit @ViewData["ControllerFriendlyName"]">
+                                    &#x270E;
+                                </a>
+                                <a asp-controller="PatientAppointment" asp-action="Index" asp-route-PatientID="@item.ID" class="btn btn-sm btn-outline-primary"
+                                   role="button" data-bs-toggle="tooltip" title="@ViewData["ControllerFriendlyName"] Details">
+                                    &#x1F50E;
+                                </a>
+                            </td>
+                        }
+                        else if (User.IsInRole("Admin"))
+                        {
+                            <td class="text-center">
+                                <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-sm btn-outline-primary"
+                                   role="button" data-bs-toggle="tooltip" title="Edit @ViewData["ControllerFriendlyName"]">
+                                    &#x270E;
+                                </a>
+                                <a asp-controller="PatientAppointment" asp-action="Index" asp-route-PatientID="@item.ID" class="btn btn-sm btn-outline-primary"
+                                   role="button" data-bs-toggle="tooltip" title="@ViewData["ControllerFriendlyName"] Details">
+                                    &#x1F50E;
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-sm btn-outline-primary"
+                                   role="button" data-bs-toggle="tooltip" title="Delete @ViewData["ControllerFriendlyName"]">
+                                    &#x274C;
+                                </a>
+                            </td>
+                        }
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>
+    <partial name="_PagingNavBar" />
+</form>
+@section Scripts {
+    <script type="text/javascript">
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+}

@@ -1,0 +1,100 @@
+﻿@model IEnumerable<MedicalOffice.Models.Appointment>
+
+<partial name="_ViewHeading" />
+
+<form asp-action="Index" method="get">
+    <div class="form-horizontal">
+        <div class="row">
+            <div class="form-group col-md-4">
+                <label class="control-label">Start Date:</label>
+                @Html.TextBox("StartDate", @ViewData["StartDate"], new { @class = "form-control", type = "date" })
+            </div>
+            <div class="form-group col-md-4">
+                <label class="control-label">End Date:</label>
+                @Html.TextBox("EndDate", @ViewData["EndDate"], new { @class = "form-control", type = "date" })
+            </div>
+            <div class="form-group col-md-4 align-self-end">
+                <input type="submit" name="actionButton" value="Filter" class="btn btn-outline-primary" />
+                <a asp-action="Index" class="btn btn-outline-dark">Clear</a>
+            </div>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartDateSummary)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartTimeSummary)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EndTimeSummary)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DurationSummary)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Doctor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Patient)
+                </th>
+                <th class="text-center" style="min-width:120px">
+                    <a asp-action="Create" class="btn btn-sm btn-outline-success"
+                       role="button" data-bs-toggle="tooltip" title="Create New @ViewData["ControllerFriendlyName"]">
+                        <strong>&#x270D; Create</strong>
+                    </a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDateSummary)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartTimeSummary)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndTimeSummary)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DurationSummary)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Doctor.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Patient.FullName)
+                    </td>
+                    <td class="text-center">
+                        <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-sm btn-outline-primary"
+                           role="button" data-bs-toggle="tooltip" title="Edit @ViewData["ControllerFriendlyName"]">
+                            &#x270E;
+                        </a>
+                        <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-sm btn-outline-primary"
+                           role="button" data-bs-toggle="tooltip" title="@ViewData["ControllerFriendlyName"] Details">
+                            &#x1F50E;
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-sm btn-outline-primary"
+                           role="button" data-bs-toggle="tooltip" title="Delete @ViewData["ControllerFriendlyName"]">
+                            &#x274C;
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <partial name="_PagingNavBar" />
+</form>
+@section Scripts {
+    <script type="text/javascript">
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
+}

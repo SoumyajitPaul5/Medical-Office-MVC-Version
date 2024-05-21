@@ -1,0 +1,17 @@
+﻿<!-- Modal-->
+<div class="modal fade" id="addMedicalTrialModal" tabindex="-1" role="dialog" aria-labelledby="MedicalTrialModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="MedicalTrialmyModalLabel">Add New Medical Trial</h4>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                @{
+                    var m = new MedicalOffice.Models.MedicalTrial();
+                    <partial name="_MedicalTrialCreate" model="m" />
+                }
+            </div>
+        </div>
+    </div>
+</div>

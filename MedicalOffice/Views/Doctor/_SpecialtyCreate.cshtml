@@ -1,0 +1,16 @@
+﻿@model MedicalOffice.Models.Specialty
+<form asp-controller="Specialty" asp-action="Create" method="post" id="createSpecialtyForm">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="text-danger validation-summary-errors"><ul id="ErrorList"></ul></div>
+            <div class="form-group">
+                <label asp-for="SpecialtyName" class="control-label"></label>
+                <input asp-for="SpecialtyName" class="form-control" />
+                <span asp-validation-for="SpecialtyName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" id="submitSpecialtyCreate" value="Save" class="btn btn-outline-dark" />
+            </div>
+        </div>
+    </div>
+</form>

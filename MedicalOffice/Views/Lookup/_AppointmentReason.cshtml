@@ -1,0 +1,29 @@
+﻿<br />
+<div class="card mb-sm-3" style="min-width: 18rem;">
+    <h4 class="card-header" id="AppointmentReason">Appointment Reasons</h4>
+    <div class="card-body">
+        @Html.DropDownList("AppointmentReasonID", null, htmlAttributes: new { @size = 6, @class = "form-control" })
+        <br />
+
+        <form asp-action="InsertFromExcel" asp-controller="AppointmentReason" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label custom-file-label">Upload Excel File:</label>
+                        <div class="input-group mb-3">
+                            <input type="file" class="form-control" name="theExcel" id="theExcel">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Upload Data" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="card-footer">
+        <a asp-controller="AppointmentReason" asp-action="Create">Create</a> |
+        <a asp-controller="AppointmentReason" asp-action="Edit" class="linkClick">Edit</a> |
+        <a asp-controller="AppointmentReason" asp-action="Delete" class="linkClick">Delete</a>
+    </div>
+</div>

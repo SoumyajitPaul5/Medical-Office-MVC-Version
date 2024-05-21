@@ -1,0 +1,209 @@
+﻿@model MedicalOffice.Models.Patient
+
+<partial name="_ViewHeading" />
+
+<hr />
+@{
+    var hasPicture = (Model.PatientPhoto?.Content != null);
+    if (hasPicture)
+        {
+            @:<div>
+                string imageBase64 = Convert.ToBase64String(Model.PatientPhoto.Content);
+                string imageSrc = string.Format("data:" + Model.PatientPhoto.MimeType + ";base64,{0}", imageBase64);
+                <img src="@imageSrc" alt="Profile Picture of @Model.FullName" title="Profile Picture of @Model.FullName" class="img-fluid rounded" />
+            @:</div><hr />
+        }
+    }
+<partial name="_addMedicalTrialModal" />
+<form asp-action="Edit" method="post" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="ID" />
+    <input type="hidden" asp-for="RowVersion" />
+    <div>
+        @{
+            if (hasPicture)
+            {
+                <div class="row">
+                    <div class="form-check m-3">
+                        <input class="form-check-input" type="checkbox" id="chkRemoveImage" name="chkRemoveImage">
+                        <label class="form-check-label" for="chkRemoveImage">
+                        <strong>Check to remove Image</strong>
+                        </label>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label custom-file-label">Picture File:</label>
+                <div class="input-group mb-3">
+                    <input type="file" class="form-control" name="thePicture" id="thePicture">
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="OHIP" class="control-label"></label>
+                <input asp-for="OHIP" class="form-control" />
+                <span asp-validation-for="OHIP" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MiddleName" class="control-label"></label>
+                <input asp-for="MiddleName" class="form-control" />
+                <span asp-validation-for="MiddleName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DOB" class="control-label"></label>
+                <input asp-for="DOB" class="form-control" />
+                <span asp-validation-for="DOB" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ExpYrVisits" class="control-label"></label>
+                <input asp-for="ExpYrVisits" class="form-control" />
+                <span asp-validation-for="ExpYrVisits" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EMail" class="control-label"></label>
+                <input asp-for="EMail" class="form-control" />
+                <span asp-validation-for="EMail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">@Html.DisplayNameFor(model => model.PatientConditions)</label>
+                <div class="m-2">
+                    <table>
+                        <tr>
+                            @{
+                                int cnt = 0;
+                                List<MedicalOffice.ViewModels.CheckOptionVM> checkboxes = ViewBag.ConditionOptions;
+                                foreach (var checkbox in checkboxes)
+                                {
+                                    if (cnt++ % 2 == 0)
+                                    {
+                                    @:</tr><tr>
+                                    }
+                                    @:<td>
+                                        <input type="checkbox"
+                                               name="selectedOptions"
+                                               value="@checkbox.ID"
+                                               @(Html.Raw(checkbox.Assigned ? "checked=\"checked\"" : "")) />
+                                        @checkbox.DisplayText @:&nbsp;&nbsp;
+                                    @:</td>
+                                }
+                            @:</tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+            <div class="form-group">
+                <label asp-for="MedicalTrialID" class="control-label"></label>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <button class="btn btn-outline-secondary" id="nowAddMedicalTrial" data-bs-toggle="modal" data-bs-target="#addMedicalTrialModal" type="button">&#x2795;</button>
+                    </div>
+                    <select asp-for="MedicalTrialID" class="form-control" asp-items="ViewBag.MedicalTrialID">
+                        <option value="">None</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="DoctorID" class="control-label"></label>
+                <select asp-for="DoctorID" class="form-control" asp-items="ViewBag.DoctorID"></select>
+                <span asp-validation-for="DoctorID" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</form>
+
+<div>
+    <partial name="_BackToList" />
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/refreshDDL.js"></script>
+    <script type="text/javascript">
+        $('#submitMedicalTrialCreate').click(function (event) {
+            event.preventDefault();
+            ClearErrors();
+            var form = $('#createMedicalTrialForm');
+            if (form.valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: form.attr('action'),
+                    data: form.serialize(),
+                    success: function () {
+                        $('#addMedicalTrialModal').modal('hide');
+                    },
+                    error: function (xhr) { 
+                        var errorMessages = []; 
+                        switch (xhr.status) {
+                            case 401:
+                                errorMessages.push("You must be logged in first.");
+                                break;
+                            case 403:
+                                errorMessages.push("You are not authorized for this action.");
+                                break;
+                            default:
+                                //Messages coming from the Model State Errors
+                                //We split on the | delimeter and the .slice removes the last one
+                                errorMessages = xhr.responseText.split("|").slice(0, -1);
+                        }
+                        //This checks if there are any elements with some content
+                        //and if not then it provides a default feedback message.
+                        if (!errorMessages.some((str) => str !== "")) {
+                          errorMessages.push("Error: Unable to complete operation");
+                        }
+                        //Put the messages in the ErrorList ul contained in the 'ValidaitonSummary' div.
+                        var ul = document.getElementById("ErrorList");
+                        for (var i = 0; i < errorMessages.length; i++) {
+                          var errorMessage = errorMessages[i];
+                          var li = document.createElement("li");
+                          li.innerHTML = errorMessage;
+                          ul.appendChild(li);
+                        }
+                    }
+                });
+            }
+            return false;
+        });
+        $('#addMedicalTrialModal').on('hide.bs.modal', function () {
+            document.getElementById("createMedicalTrialForm").reset();//to clear the data in the popup form
+            ClearErrors();
+            var selectedOption = $('#MedicalTrialID').val();//Return to the current selected value
+            refreshDDL('MedicalTrialID', '/Patient/GetMedicalTrials/' + selectedOption, false, null, true, 'None', true);
+        });
+        function ClearErrors() {
+            //Empty out the list of validation errors if there are any
+            var ul = document.getElementById("ErrorList");
+            while (ul.firstChild) {
+              ul.removeChild(ul.firstChild);
+            }
+        }
+    </script>
+
+}
