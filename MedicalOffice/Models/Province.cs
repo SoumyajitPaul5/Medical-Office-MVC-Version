@@ -2,6 +2,7 @@
 
 namespace MedicalOffice.Models
 {
+    // Represents a province in the system
     public class Province
     {
         [Display(Name = "Two Letter Province Code")]
@@ -15,7 +16,7 @@ namespace MedicalOffice.Models
         [StringLength(50, ErrorMessage = "Province name can only be 50 characters long.")]
         public string Name { get; set; }
 
+        // Collection of cities within the province
         public ICollection<City> Cities { get; set; } = new HashSet<City>();
     }
 }
-

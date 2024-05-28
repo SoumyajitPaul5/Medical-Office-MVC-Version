@@ -12,6 +12,7 @@ namespace MedicalOffice.Models
         [DisplayFormat(NullDisplayText = "No Reason Given")]
         public string ReasonName { get; set; }
 
+        // Navigation property for related Appointments
         public ICollection<Appointment> Appointments { get; set; } = new HashSet<Appointment>();
     }
 }

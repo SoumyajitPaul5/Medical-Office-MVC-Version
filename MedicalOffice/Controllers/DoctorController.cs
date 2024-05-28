@@ -28,49 +28,52 @@ namespace MedicalOffice.Controllers
         // GET: Doctors
         public async Task<IActionResult> Index(string SearchString, string SearchDoctor, int? SpecialtyID, int? page, int? pageSizeID)
         {
-            ViewData["SpecialtyID"] = new SelectList(_context
-                .Specialties
-                .OrderBy(s => s.SpecialtyName), "ID", "SpecialtyName");
+            // Populate specialties dropdown list
+            ViewData["SpecialtyID"] = new SelectList(_context.Specialties.OrderBy(s => s.SpecialtyName), "ID", "SpecialtyName");
 
             ViewData["Filtering"] = "btn-outline-secondary";
             int numberFilters = 0;
 
+            // Query to get doctors and include related entities
             var doctors = _context.Doctors
-                 .Include(d => d.DoctorSpecialties).ThenInclude(d => d.Specialty)
-                 .Include(d => d.DoctorDocuments)
-                 .Include(d => d.City)
-                 .AsNoTracking();
+                .Include(d => d.DoctorSpecialties).ThenInclude(d => d.Specialty)
+                .Include(d => d.DoctorDocuments)
+                .Include(d => d.City)
+                .AsNoTracking();
 
+            // Filter by SpecialtyID
             if (SpecialtyID.HasValue)
             {
                 doctors = doctors.Where(p => p.DoctorSpecialties.Any(c => c.SpecialtyID == SpecialtyID));
                 numberFilters++;
             }
+            // Filter by SearchString
             if (!String.IsNullOrEmpty(SearchString))
             {
                 doctors = doctors.Where(p => p.LastName.ToUpper().Contains(SearchString.ToUpper())
                                        || p.FirstName.ToUpper().Contains(SearchString.ToUpper()));
                 numberFilters++;
             }
+            // Filter by SearchDoctor
             if (!String.IsNullOrEmpty(SearchDoctor))
             {
-                doctors = doctors.Where(p => p.FirstName.ToUpper()
-                + " " + p.LastName.ToUpper() == SearchDoctor.ToUpper());
+                doctors = doctors.Where(p => p.FirstName.ToUpper() + " " + p.LastName.ToUpper() == SearchDoctor.ToUpper());
             }
+            // Update filtering indicators
             if (numberFilters != 0)
             {
                 ViewData["Filtering"] = " btn-danger";
-                ViewData["numberFilters"] = "(" + numberFilters.ToString()
-                    + " Filter" + (numberFilters > 1 ? "s" : "") + " Applied)";
+                ViewData["numberFilters"] = "(" + numberFilters.ToString() + " Filter" + (numberFilters > 1 ? "s" : "") + " Applied)";
             }
-            doctors = doctors
-                        .OrderBy(p => p.LastName)
-                        .ThenBy(p => p.FirstName);
+            // Sort doctors
+            doctors = doctors.OrderBy(p => p.LastName).ThenBy(p => p.FirstName);
 
+            // Set page size for pagination
             int pageSize = PageSizeHelper.SetPageSize(HttpContext, pageSizeID, ControllerName());
             ViewData["pageSizeID"] = PageSizeHelper.PageSizeList(pageSize);
             var pagedData = await PaginatedList<Doctor>.CreateAsync(doctors, page ?? 1, pageSize);
 
+            // Return view based on user role
             if (User.IsInRole("Admin"))
             {
                 return View("IndexAdmin", pagedData);
@@ -94,8 +97,8 @@ namespace MedicalOffice.Controllers
                 return NotFound();
             }
 
-            var doctor = await _context
-                .Doctors
+            // Get doctor details
+            var doctor = await _context.Doctors
                 .Include(d => d.City)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.ID == id);
@@ -118,13 +121,10 @@ namespace MedicalOffice.Controllers
         }
 
         // POST: Doctors/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> Create([Bind("ID,FirstName,MiddleName," +
-            "LastName, CityID")] Doctor doctor, string[] selectedOptions, List<IFormFile> theFiles)
+        public async Task<IActionResult> Create([Bind("ID,FirstName,MiddleName,LastName,CityID")] Doctor doctor, string[] selectedOptions, List<IFormFile> theFiles)
         {
             try
             {
@@ -137,7 +137,7 @@ namespace MedicalOffice.Controllers
                     return RedirectToAction("Details", new { doctor.ID });
                 }
             }
-            catch (RetryLimitExceededException /* dex */)
+            catch (RetryLimitExceededException)
             {
                 ModelState.AddModelError("", "Unable to save changes after multiple attempts. Try again, and if the problem persists, see your system administrator.");
             }
@@ -146,7 +146,6 @@ namespace MedicalOffice.Controllers
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
 
-            //Validation Error so give the user another chance.
             PopulateAssignedSpecialtyData(doctor);
             PopulateDropDownLists(doctor);
             return View(doctor);
@@ -161,6 +160,7 @@ namespace MedicalOffice.Controllers
                 return NotFound();
             }
 
+            // Get doctor to edit
             var doctor = await _context.Doctors
                .Include(d => d.DoctorSpecialties).ThenInclude(d => d.Specialty)
                .Include(d => d.DoctorDocuments)
@@ -178,32 +178,25 @@ namespace MedicalOffice.Controllers
         }
 
         // POST: Doctors/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int id, string[] selectedOptions, List<IFormFile> theFiles)
         {
-            //Go get the Doctor to update
             var doctorToUpdate = await _context.Doctors
                 .Include(d => d.DoctorSpecialties).ThenInclude(d => d.Specialty)
                 .Include(d => d.DoctorDocuments)
                 .Include(d => d.City)
                 .FirstOrDefaultAsync(p => p.ID == id);
 
-            //Check that you got it or exit with a not found error
             if (doctorToUpdate == null)
             {
                 return NotFound();
             }
 
-            //Update the Doctor's Specialties
             UpdateDoctorSpecialties(selectedOptions, doctorToUpdate);
 
-            //Try updating it with the values posted
-            if (await TryUpdateModelAsync<Doctor>(doctorToUpdate, "",
-                d => d.FirstName, d => d.MiddleName, d => d.LastName, d => d.CityID))
+            if (await TryUpdateModelAsync<Doctor>(doctorToUpdate, "", d => d.FirstName, d => d.MiddleName, d => d.LastName, d => d.CityID))
             {
                 try
                 {
@@ -211,7 +204,7 @@ namespace MedicalOffice.Controllers
                     await _context.SaveChangesAsync();
                     return RedirectToAction("Details", new { doctorToUpdate.ID });
                 }
-                catch (RetryLimitExceededException /* dex */)
+                catch (RetryLimitExceededException)
                 {
                     ModelState.AddModelError("", "Unable to save changes after multiple attempts. Try again, and if the problem persists, see your system administrator.");
                 }
@@ -230,10 +223,8 @@ namespace MedicalOffice.Controllers
                 {
                     ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
                 }
-
             }
 
-            //Validation Error so give the user another chance.
             PopulateAssignedSpecialtyData(doctorToUpdate);
             PopulateDropDownLists(doctorToUpdate);
             return View(doctorToUpdate);
@@ -248,6 +239,7 @@ namespace MedicalOffice.Controllers
                 return NotFound();
             }
 
+            // Get doctor to delete
             var doctor = await _context.Doctors
                  .Include(d => d.DoctorSpecialties).ThenInclude(d => d.Specialty)
                  .Include(d => d.DoctorDocuments)
@@ -303,6 +295,7 @@ namespace MedicalOffice.Controllers
 
         public PartialViewResult ListOfSpecialtiesDetails(int id)
         {
+            // Get list of specialties for a specific doctor
             var query = from s in _context.DoctorSpecialties.Include(p => p.Specialty)
                         where s.DoctorID == id
                         orderby s.Specialty.SpecialtyName
@@ -312,6 +305,7 @@ namespace MedicalOffice.Controllers
 
         public PartialViewResult ListOfPatientsDetails(int id)
         {
+            // Get list of patients for a specific doctor
             var query = from p in _context.Patients
                         where p.DoctorID == id
                         orderby p.LastName, p.FirstName
@@ -321,14 +315,17 @@ namespace MedicalOffice.Controllers
 
         public PartialViewResult ListOfDocumentsDetails(int id)
         {
+            // Get list of documents for a specific doctor
             var query = from p in _context.DoctorDocuments
                         where p.DoctorID == id
                         orderby p.FileName
                         select p;
             return PartialView("_ListOfDocuments", query.ToList());
         }
+
         public JsonResult GetDoctors(string term)
         {
+            // Get list of doctors based on search term
             var result = from d in _context.Doctors
                          where d.LastName.ToUpper().Contains(term.ToUpper())
                                || d.FirstName.ToUpper().Contains(term.ToUpper())
@@ -336,11 +333,12 @@ namespace MedicalOffice.Controllers
                          select new { value = d.FirstName + " " + d.LastName };
             return Json(result);
         }
+
         private SelectList ProvinceSelectList(string selectedId)
         {
-            return new SelectList(_context.Provinces
-                .OrderBy(d => d.Name), "ID", "Name", selectedId);
+            return new SelectList(_context.Provinces.OrderBy(d => d.Name), "ID", "Name", selectedId);
         }
+
         private SelectList CitySelectList(string ProvinceID, int? selectedId)
         {
             var query = from c in _context.Cities
@@ -348,12 +346,13 @@ namespace MedicalOffice.Controllers
                         select c;
             return new SelectList(query.OrderBy(p => p.Name), "ID", "Summary", selectedId);
         }
+
         private void PopulateDropDownLists(Doctor doctor = null)
         {
-
             if ((doctor?.CityID).HasValue)
-            {   
-                if(doctor.City==null) {
+            {
+                if (doctor.City == null)
+                {
                     doctor.City = _context.Cities.Find(doctor.CityID);
                 }
                 ViewData["ProvinceID"] = ProvinceSelectList(doctor.City.ProvinceID);
@@ -374,19 +373,17 @@ namespace MedicalOffice.Controllers
 
         private SelectList SpecialtySelectList(string skip)
         {
-            var SpecialtyQuery = _context.Specialties
-                .AsNoTracking();
+            var SpecialtyQuery = _context.Specialties.AsNoTracking();
 
             if (!String.IsNullOrEmpty(skip))
             {
-                
                 string[] avoidStrings = skip.Split('|');
                 int[] skipKeys = Array.ConvertAll(avoidStrings, s => int.Parse(s));
-                SpecialtyQuery = SpecialtyQuery
-                    .Where(s => !skipKeys.Contains(s.ID));
+                SpecialtyQuery = SpecialtyQuery.Where(s => !skipKeys.Contains(s.ID));
             }
             return new SelectList(SpecialtyQuery.OrderBy(d => d.SpecialtyName.ToLower()), "ID", "SpecialtyName");
         }
+
         [HttpGet]
         public JsonResult GetSpecialties(string skip)
         {
@@ -422,6 +419,7 @@ namespace MedicalOffice.Controllers
             ViewData["selOpts"] = new MultiSelectList(selected.OrderBy(s => s.DisplayText), "ID", "DisplayText");
             ViewData["availOpts"] = new MultiSelectList(available.OrderBy(s => s.DisplayText), "ID", "DisplayText");
         }
+
         private void UpdateDoctorSpecialties(string[] selectedOptions, Doctor doctorToUpdate)
         {
             if (selectedOptions == null)
@@ -445,7 +443,7 @@ namespace MedicalOffice.Controllers
                         });
                     }
                 }
-                else 
+                else
                 {
                     if (currentOptionsHS.Contains(s.ID))
                     {
@@ -475,7 +473,7 @@ namespace MedicalOffice.Controllers
                     string mimeType = f.ContentType;
                     string fileName = Path.GetFileName(f.FileName);
                     long fileLength = f.Length;
-                    
+
                     if (!(fileName == "" || fileLength == 0))
                     {
                         DoctorDocument d = new DoctorDocument();
@@ -491,9 +489,10 @@ namespace MedicalOffice.Controllers
                 }
             }
         }
+
         private bool DoctorExists(int id)
         {
-          return _context.Doctors.Any(e => e.ID == id);
+            return _context.Doctors.Any(e => e.ID == id);
         }
     }
 }

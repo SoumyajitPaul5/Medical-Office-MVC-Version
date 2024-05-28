@@ -63,24 +63,21 @@ namespace MedicalOffice.Models
                 {
                     TimeSpan d = ((TimeSpan)(EndTime - StartTime));
                     string duration = "";
-                    if (d.Minutes > 0) //Show the minutes if there are any
+                    if (d.Minutes > 0) // Show the minutes if there are any
                     {
                         duration = d.Minutes.ToString() + " min";
                     }
-                    if (d.Hours > 0) //Show the hours if there are any
+                    if (d.Hours > 0) // Show the hours if there are any
                     {
                         duration = d.Hours.ToString() + " hr" + (d.Hours > 1 ? "s" : "")
-                            + (d.Minutes > 0 ? ", " + duration : ""); //Put a ", " between hours and minutes if there are both
+                            + (d.Minutes > 0 ? ", " + duration : ""); // Put a ", " between hours and minutes if there are both
                     }
-                    if (d.Days > 0) //Show the days if there are any
+                    if (d.Days > 0) // Show the days if there are any
                     {
                         duration = d.Days.ToString() + " day" + (d.Days > 1 ? "s" : "")
-                            + (d.Hours > 0 || d.Minutes > 0 ? ", " + duration : ""); //Put a ", " between days and hours/minutes if there are any
+                            + (d.Hours > 0 || d.Minutes > 0 ? ", " + duration : ""); // Put a ", " between days and hours/minutes if there are any
                     }
-                    //Changed from this approach to avoid possibly having a comma at the end of the string
-                    //duration = (d.Days > 0 ? d.Days.ToString() + " day" + (d.Days > 1 ? "s, " : ", ") : "") +
-                    //    (d.Hours > 0 ? d.Hours.ToString() + " hr" + (d.Hours > 1 ? "s, " : ", ") : "") +
-                    //    (d.Minutes > 0 ? d.Minutes.ToString() + " min" : "");
+
                     return duration;
                 }
             }
@@ -120,13 +117,13 @@ namespace MedicalOffice.Models
         [Display(Name = "Patient")]
         public Patient Patient { get; set; }
 
-        //Note: Reason is not required
         [Display(Name = "Reason for Appointment")]
         public int? AppointmentReasonID { get; set; }
 
         [Display(Name = "Reason for Appointment")]
         public AppointmentReason AppointmentReason { get; set; }
 
+        // Custom validation to check that the end time is after the start time
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (EndTime < StartTime)

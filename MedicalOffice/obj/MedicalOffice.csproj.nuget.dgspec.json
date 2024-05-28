@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\IT HELP\\3 Git Projects\\Medical Office Solution\\MedicalOffice\\MedicalOffice.csproj": {}
+    "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\MedicalOffice.csproj": {}
   },
   "projects": {
-    "D:\\IT HELP\\3 Git Projects\\Medical Office Solution\\MedicalOffice\\MedicalOffice.csproj": {
+    "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\MedicalOffice.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\IT HELP\\3 Git Projects\\Medical Office Solution\\MedicalOffice\\MedicalOffice.csproj",
+        "projectUniqueName": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\MedicalOffice.csproj",
         "projectName": "MedicalOffice",
-        "projectPath": "D:\\IT HELP\\3 Git Projects\\Medical Office Solution\\MedicalOffice\\MedicalOffice.csproj",
+        "projectPath": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\MedicalOffice.csproj",
         "packagesPath": "C:\\Users\\ullas\\.nuget\\packages\\",
-        "outputPath": "D:\\IT HELP\\3 Git Projects\\Medical Office Solution\\MedicalOffice\\obj\\",
+        "outputPath": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -59,29 +59,29 @@
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[7.0.11, )"
+              "version": "[7.0.18, )"
             },
             "Microsoft.AspNetCore.Identity.UI": {
               "target": "Package",
-              "version": "[7.0.11, )"
+              "version": "[7.0.18, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[7.0.11, )"
+              "version": "[7.0.18, )"
             },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
-              "version": "[7.0.11, )"
+              "version": "[7.0.18, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[7.0.12, )"
+              "version": "[7.0.18, )"
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[7.0.11, )"
+              "version": "[7.0.12, )"
             },
             "SkiaSharp": {
               "target": "Package",

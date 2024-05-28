@@ -2,34 +2,24 @@
 {
     public static class MaintainURL
     {
-        /// <summary>
-        /// Maintain the URL for an Index View including filter, sort and page information.
-        /// Depends on the CookieHelper Utility.
-        /// Warning: Works with our default route by setting the href to /Controller
-        /// so you may need to make adjustments for a custom route.
-        /// </summary>
-        /// <param name="httpContext">the HttpContext from the Controller</param>
-        /// <param name="ControllerName">The Name of the Controller</param>
-        /// <returns>The Index URL with paramerters if required</returns>
+        // Method to return the URL based on the controller name and store it in a cookie
         public static string ReturnURL(HttpContext httpContext, string ControllerName)
         {
             string cookieName = ControllerName + "URL";
             string SearchText = "/" + ControllerName + "?";
-            //Get the URL of the page that sent us here
             string returnURL = httpContext.Request.Headers["Referer"].ToString();
+
+            // Check if the referrer URL contains the search text
             if (returnURL.Contains(SearchText))
             {
-                //Came here from the Index with some parameters
-                //Save the Parameters in a Cookie
                 returnURL = returnURL[returnURL.LastIndexOf(SearchText)..];
+                // Set the cookie with the return URL
                 CookieHelper.CookieSet(httpContext, cookieName, returnURL, 30);
                 return returnURL;
             }
             else
             {
-                //Get it from the Cookie
-                //Note that this might return an empty string but we will
-                //change it to go back to the Index of the Controller.
+                // Get the return URL from the cookie if it exists
                 returnURL = httpContext.Request.Cookies[cookieName];
                 return returnURL ?? "/" + ControllerName;
             }

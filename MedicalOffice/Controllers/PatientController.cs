@@ -15,43 +15,40 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace MedicalOffice.Controllers
 {
-    [Authorize]
+    [Authorize] // Restricts access to authenticated users
     public class PatientController : ElephantController
     {
         private readonly MedicalOfficeContext _context;
 
+        // Constructor to initialize the database context
         public PatientController(MedicalOfficeContext context)
         {
             _context = context;
         }
 
         // GET: Patients
+        // Displays a list of patients with filtering, sorting, and pagination
         public async Task<IActionResult> Index(string SearchString, int? DoctorID, int? MedicalTrialID,
             int? page, int? pageSizeID, string actionButton, int? ConditionID,
             string sortDirection = "asc", string sortField = "Patient")
         {
-            
             ViewData["Filtering"] = "btn-outline-secondary";
             int numberFilters = 0;
 
-
             string[] sortOptions = new[] { "Patient", "Age", "Visits/Yr", "Doctor" };
 
-            ViewData["ConditionID"] = new SelectList(_context
-                .Conditions
-                .OrderBy(c => c.ConditionName), "ID", "ConditionName");
+            ViewData["ConditionID"] = new SelectList(_context.Conditions.OrderBy(c => c.ConditionName), "ID", "ConditionName");
 
             PopulateDropDownLists();
 
-
-            var patients = _context
-                .Patients
+            var patients = _context.Patients
                 .Include(p => p.PatientThumbnail)
                 .Include(p => p.Doctor)
                 .Include(p => p.MedicalTrial)
-                .Include(p=>p.PatientConditions).ThenInclude(p=>p.Condition)
+                .Include(p => p.PatientConditions).ThenInclude(p => p.Condition)
                 .AsNoTracking();
 
+            // Filtering patients based on selected criteria
             if (DoctorID.HasValue)
             {
                 patients = patients.Where(p => p.DoctorID == DoctorID);
@@ -77,83 +74,44 @@ namespace MedicalOffice.Controllers
             if (numberFilters != 0)
             {
                 ViewData["Filtering"] = " btn-danger";
-                ViewData["numberFilters"] = "(" + numberFilters.ToString()
-                    + " Filter" + (numberFilters > 1 ? "s" : "") + " Applied)";
-
+                ViewData["numberFilters"] = "(" + numberFilters.ToString() + " Filter" + (numberFilters > 1 ? "s" : "") + " Applied)";
             }
 
-            if (!String.IsNullOrEmpty(actionButton)) 
+            // Sorting patients based on selected criteria
+            if (!String.IsNullOrEmpty(actionButton))
             {
                 page = 1;
 
                 if (sortOptions.Contains(actionButton))
                 {
-                    if (actionButton == sortField) 
+                    if (actionButton == sortField)
                     {
                         sortDirection = sortDirection == "asc" ? "desc" : "asc";
                     }
                     sortField = actionButton;
                 }
             }
+
             if (sortField == "Visits/Yr")
             {
-                if (sortDirection == "asc")
-                {
-                    patients = patients
-                        .OrderBy(p => p.ExpYrVisits);
-                }
-                else
-                {
-                    patients = patients
-                        .OrderByDescending(p => p.ExpYrVisits);
-                }
+                patients = sortDirection == "asc" ? patients.OrderBy(p => p.ExpYrVisits) : patients.OrderByDescending(p => p.ExpYrVisits);
             }
             else if (sortField == "Age")
             {
-                if (sortDirection == "asc")
-                {
-                    patients = patients
-                        .OrderByDescending(p => p.DOB);
-                }
-                else
-                {
-                    patients = patients
-                        .OrderBy(p => p.DOB);
-                }
+                patients = sortDirection == "asc" ? patients.OrderByDescending(p => p.DOB) : patients.OrderBy(p => p.DOB);
             }
             else if (sortField == "Doctor")
             {
-                if (sortDirection == "asc")
-                {
-                    patients = patients
-                        .OrderBy(p => p.Doctor.LastName)
-                        .ThenBy(p => p.Doctor.FirstName);
-                }
-                else
-                {
-                    patients = patients
-                        .OrderByDescending(p => p.Doctor.LastName)
-                        .ThenByDescending(p => p.Doctor.FirstName);
-                }
+                patients = sortDirection == "asc" ? patients.OrderBy(p => p.Doctor.LastName).ThenBy(p => p.Doctor.FirstName) : patients.OrderByDescending(p => p.Doctor.LastName).ThenByDescending(p => p.Doctor.FirstName);
             }
-            else 
+            else
             {
-                if (sortDirection == "asc")
-                {
-                    patients = patients
-                        .OrderBy(p => p.LastName)
-                        .ThenBy(p => p.FirstName);
-                }
-                else
-                {
-                    patients = patients
-                        .OrderByDescending(p => p.LastName)
-                        .ThenByDescending(p => p.FirstName);
-                }
+                patients = sortDirection == "asc" ? patients.OrderBy(p => p.LastName).ThenBy(p => p.FirstName) : patients.OrderByDescending(p => p.LastName).ThenByDescending(p => p.FirstName);
             }
             ViewData["sortField"] = sortField;
             ViewData["sortDirection"] = sortDirection;
 
+            // Pagination setup
             int pageSize = PageSizeHelper.SetPageSize(HttpContext, pageSizeID, ControllerName());
             ViewData["pageSizeID"] = PageSizeHelper.PageSizeList(pageSize);
             var pagedData = await PaginatedList<Patient>.CreateAsync(patients.AsNoTracking(), page ?? 1, pageSize);
@@ -162,7 +120,8 @@ namespace MedicalOffice.Controllers
         }
 
         // GET: Patients/Details/5
-        [Authorize(Roles ="Admin,Supervisor")]
+        // Displays the details of a specific patient
+        [Authorize(Roles = "Admin,Supervisor")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Patients == null)
@@ -186,10 +145,10 @@ namespace MedicalOffice.Controllers
         }
 
         // GET: Patients/Create
+        // Displays the form to create a new patient
         [Authorize(Roles = "Admin,Supervisor")]
         public IActionResult Create()
         {
-
             var patient = new Patient();
             PopulateAssignedConditionData(patient);
             PopulateDropDownLists();
@@ -197,14 +156,11 @@ namespace MedicalOffice.Controllers
         }
 
         // POST: Patients/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Handles the creation of a new patient
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin,Supervisor")]
-        public async Task<IActionResult> Create([Bind("ID,OHIP,FirstName,MiddleName,LastName,DOB," +
-            "ExpYrVisits,Phone,EMail,MedicalTrialID,DoctorID")] Patient patient, 
-            string[] selectedOptions, IFormFile thePicture)
+        public async Task<IActionResult> Create([Bind("ID,OHIP,FirstName,MiddleName,LastName,DOB,ExpYrVisits,Phone,EMail,MedicalTrialID,DoctorID")] Patient patient, string[] selectedOptions, IFormFile thePicture)
         {
             try
             {
@@ -236,7 +192,7 @@ namespace MedicalOffice.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
                 }
             }
             PopulateAssignedConditionData(patient);
@@ -245,6 +201,7 @@ namespace MedicalOffice.Controllers
         }
 
         // GET: Patients/Edit/5
+        // Displays the form to edit an existing patient
         [Authorize(Roles = "Admin,Supervisor")]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -267,13 +224,11 @@ namespace MedicalOffice.Controllers
         }
 
         // POST: Patients/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Handles the update of an existing patient
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin,Supervisor")]
-        public async Task<IActionResult> Edit(int id, string[] selectedOptions, 
-            Byte[] RowVersion, string chkRemoveImage, IFormFile thePicture)
+        public async Task<IActionResult> Edit(int id, string[] selectedOptions, Byte[] RowVersion, string chkRemoveImage, IFormFile thePicture)
         {
             var patientToUpdate = await _context.Patients
                 .Include(p => p.PatientPhoto)
@@ -289,9 +244,7 @@ namespace MedicalOffice.Controllers
 
             _context.Entry(patientToUpdate).Property("RowVersion").OriginalValue = RowVersion;
 
-            if (await TryUpdateModelAsync<Patient>(patientToUpdate, "",
-                p=>p.OHIP, p => p.FirstName, p => p.MiddleName, p => p.LastName, p => p.DOB,
-                p => p.ExpYrVisits, p => p.Phone, p => p.EMail, p => p.MedicalTrialID, p => p.DoctorID))
+            if (await TryUpdateModelAsync<Patient>(patientToUpdate, "", p => p.OHIP, p => p.FirstName, p => p.MiddleName, p => p.LastName, p => p.DOB, p => p.ExpYrVisits, p => p.Phone, p => p.EMail, p => p.MedicalTrialID, p => p.DoctorID))
             {
                 try
                 {
@@ -319,36 +272,27 @@ namespace MedicalOffice.Controllers
                     var databaseEntry = exceptionEntry.GetDatabaseValues();
                     if (databaseEntry == null)
                     {
-                        ModelState.AddModelError("",
-                            "Unable to save changes. The Patient was deleted by another user.");
+                        ModelState.AddModelError("", "Unable to save changes. The Patient was deleted by another user.");
                     }
                     else
                     {
                         var databaseValues = (Patient)databaseEntry.ToObject();
                         if (databaseValues.FirstName != clientValues.FirstName)
-                            ModelState.AddModelError("FirstName", "Current value: "
-                                + databaseValues.FirstName);
+                            ModelState.AddModelError("FirstName", "Current value: " + databaseValues.FirstName);
                         if (databaseValues.MiddleName != clientValues.MiddleName)
-                            ModelState.AddModelError("MiddleName", "Current value: "
-                                + databaseValues.MiddleName);
+                            ModelState.AddModelError("MiddleName", "Current value: " + databaseValues.MiddleName);
                         if (databaseValues.LastName != clientValues.LastName)
-                            ModelState.AddModelError("LastName", "Current value: "
-                                + databaseValues.LastName);
+                            ModelState.AddModelError("LastName", "Current value: " + databaseValues.LastName);
                         if (databaseValues.OHIP != clientValues.OHIP)
-                            ModelState.AddModelError("OHIP", "Current value: "
-                                + databaseValues.OHIP);
+                            ModelState.AddModelError("OHIP", "Current value: " + databaseValues.OHIP);
                         if (databaseValues.DOB != clientValues.DOB)
-                            ModelState.AddModelError("DOB", "Current value: "
-                                + String.Format("{0:d}", databaseValues.DOB));
+                            ModelState.AddModelError("DOB", "Current value: " + String.Format("{0:d}", databaseValues.DOB));
                         if (databaseValues.Phone != clientValues.Phone)
-                            ModelState.AddModelError("Phone", "Current value: "
-                                + databaseValues.PhoneFormatted);
+                            ModelState.AddModelError("Phone", "Current value: " + databaseValues.PhoneFormatted);
                         if (databaseValues.EMail != clientValues.EMail)
-                            ModelState.AddModelError("EMail", "Current value: "
-                                + databaseValues.EMail);
+                            ModelState.AddModelError("EMail", "Current value: " + databaseValues.EMail);
                         if (databaseValues.ExpYrVisits != clientValues.ExpYrVisits)
-                            ModelState.AddModelError("ExpYrVisits", "Current value: "
-                                + databaseValues.ExpYrVisits);
+                            ModelState.AddModelError("ExpYrVisits", "Current value: " + databaseValues.ExpYrVisits);
                         if (databaseValues.DoctorID != clientValues.DoctorID)
                         {
                             Doctor databaseDoctor = await _context.Doctors.FirstOrDefaultAsync(i => i.ID == databaseValues.DoctorID);
@@ -363,16 +307,11 @@ namespace MedicalOffice.Controllers
                                 ModelState.AddModelError("MedicalTrialID", $"Current value: {databaseMedicalTrial?.TrialName}");
                             }
                             else
-
                             {
                                 ModelState.AddModelError("MedicalTrialID", $"Current value: None");
                             }
                         }
-                        ModelState.AddModelError(string.Empty, "The record you attempted to edit "
-                                + "was modified by another user after you received your values. The "
-                                + "edit operation was canceled and the current values in the database "
-                                + "have been displayed. If you still want to save your version of this record, click "
-                                + "the Save button again. Otherwise click the 'Back to Patient List' hyperlink.");
+                        ModelState.AddModelError(string.Empty, "The record you attempted to edit was modified by another user after you received your values. The edit operation was canceled and the current values in the database have been displayed. If you still want to save your version of this record, click the Save button again. Otherwise click the 'Back to Patient List' hyperlink.");
                         patientToUpdate.RowVersion = (byte[])databaseValues.RowVersion;
                         ModelState.Remove("RowVersion");
                     }
@@ -386,7 +325,7 @@ namespace MedicalOffice.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+                        ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
                     }
                 }
             }
@@ -396,6 +335,7 @@ namespace MedicalOffice.Controllers
         }
 
         // GET: Patients/Delete/5
+        // Displays the form to confirm the deletion of a patient
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -419,6 +359,7 @@ namespace MedicalOffice.Controllers
         }
 
         // POST: Patients/Delete/5
+        // Handles the deletion of a patient
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin")]
@@ -449,19 +390,19 @@ namespace MedicalOffice.Controllers
             return View(patient);
         }
 
- 
+        // Generates a SelectList for doctors
         private SelectList DoctorSelectList(int? selectedId)
         {
-            return new SelectList(_context.Doctors
-                .OrderBy(d => d.LastName)
-                .ThenBy(d => d.FirstName), "ID", "FormalName", selectedId);
+            return new SelectList(_context.Doctors.OrderBy(d => d.LastName).ThenBy(d => d.FirstName), "ID", "FormalName", selectedId);
         }
+
+        // Generates a SelectList for medical trials
         private SelectList MedicalTrialList(int? selectedId)
         {
-            return new SelectList(_context
-                .MedicalTrials
-                .OrderBy(m => m.TrialName), "ID", "TrialName", selectedId);
+            return new SelectList(_context.MedicalTrials.OrderBy(m => m.TrialName), "ID", "TrialName", selectedId);
         }
+
+        // Populates dropdown lists for doctors and medical trials
         private void PopulateDropDownLists(Patient patient = null)
         {
             ViewData["DoctorID"] = DoctorSelectList(patient?.DoctorID);
@@ -474,9 +415,9 @@ namespace MedicalOffice.Controllers
             return Json(MedicalTrialList(id));
         }
 
+        // Populates the assigned conditions data for a patient
         private void PopulateAssignedConditionData(Patient patient)
         {
-
             var allOptions = _context.Conditions;
             var currentOptionIDs = new HashSet<int>(patient.PatientConditions.Select(b => b.ConditionID));
             var checkBoxes = new List<CheckOptionVM>();
@@ -491,6 +432,8 @@ namespace MedicalOffice.Controllers
             }
             ViewData["ConditionOptions"] = checkBoxes;
         }
+
+        // Updates the conditions assigned to a patient
         private void UpdatePatientConditions(string[] selectedOptions, Patient patientToUpdate)
         {
             if (selectedOptions == null)
@@ -500,20 +443,19 @@ namespace MedicalOffice.Controllers
             }
 
             var selectedOptionsHS = new HashSet<string>(selectedOptions);
-            var patientOptionsHS = new HashSet<int>
-                (patientToUpdate.PatientConditions.Select(c => c.ConditionID));
+            var patientOptionsHS = new HashSet<int>(patientToUpdate.PatientConditions.Select(c => c.ConditionID));
             foreach (var option in _context.Conditions)
             {
                 if (selectedOptionsHS.Contains(option.ID.ToString()))
                 {
-                    if (!patientOptionsHS.Contains(option.ID)) 
+                    if (!patientOptionsHS.Contains(option.ID))
                     {
                         patientToUpdate.PatientConditions.Add(new PatientCondition { PatientID = patientToUpdate.ID, ConditionID = option.ID });
                     }
                 }
                 else
                 {
-                    if (patientOptionsHS.Contains(option.ID)) 
+                    if (patientOptionsHS.Contains(option.ID))
                     {
                         PatientCondition conditionToRemove = patientToUpdate.PatientConditions.SingleOrDefault(c => c.ConditionID == option.ID);
                         _context.Remove(conditionToRemove);
@@ -522,6 +464,7 @@ namespace MedicalOffice.Controllers
             }
         }
 
+        // Adds a picture to a patient's profile
         private async Task AddPicture(Patient patient, IFormFile thePicture)
         {
             if (thePicture != null)
@@ -543,7 +486,7 @@ namespace MedicalOffice.Controllers
                             patient.PatientThumbnail = _context.PatientThumbnails.Where(p => p.PatientID == patient.ID).FirstOrDefault();
                             patient.PatientThumbnail.Content = ResizeImage.shrinkImageWebp(pictureArray, 75, 90);
                         }
-                        else 
+                        else
                         {
                             patient.PatientPhoto = new PatientPhoto
                             {
@@ -561,9 +504,10 @@ namespace MedicalOffice.Controllers
             }
         }
 
+        // Checks if a patient exists in the database
         private bool PatientExists(int id)
         {
-          return _context.Patients.Any(e => e.ID == id);
+            return _context.Patients.Any(e => e.ID == id);
         }
     }
 }

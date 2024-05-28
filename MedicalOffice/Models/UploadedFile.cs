@@ -2,6 +2,7 @@
 
 namespace MedicalOffice.Models
 {
+    // Represents a file uploaded to the system
     public class UploadedFile
     {
         public int ID { get; set; }
@@ -13,6 +14,7 @@ namespace MedicalOffice.Models
         [StringLength(255)]
         public string MimeType { get; set; }
 
+        // Content of the uploaded file
         public FileContent FileContent { get; set; } = new FileContent();
     }
 }

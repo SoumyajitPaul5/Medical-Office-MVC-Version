@@ -13,17 +13,19 @@ using MedicalOffice.Utilities;
 
 namespace MedicalOffice.Controllers
 {
-    [Authorize(Roles = "Admin,Supervisor")]
+    [Authorize(Roles = "Admin,Supervisor")] // Restricts access to Admin and Supervisor roles
     public class PatientAppointmentController : ElephantController
     {
         private readonly MedicalOfficeContext _context;
 
+        // Constructor to initialize the database context
         public PatientAppointmentController(MedicalOfficeContext context)
         {
             _context = context;
         }
 
         // GET: PatientAppointment
+        // Displays the list of appointments for a specific patient with sorting, filtering, and pagination
         public async Task<IActionResult> Index(int? PatientID, int? page, int? pageSizeID, int? AppointmentReasonID, string actionButton,
             string SearchString, string sortDirection = "desc", string sortField = "Appointment")
         {
@@ -41,6 +43,7 @@ namespace MedicalOffice.Controllers
             ViewData["Filtering"] = "btn-outline-secondary";
             int numberFilters = 0;
 
+            // Retrieves the list of appointments for the specified patient
             var appts = from a in _context.Appointments
                         .Include(a => a.AppointmentReason)
                         .Include(a => a.Patient)
@@ -48,6 +51,7 @@ namespace MedicalOffice.Controllers
                         where a.PatientID == PatientID.GetValueOrDefault()
                         select a;
 
+            // Applies filters
             if (AppointmentReasonID.HasValue)
             {
                 appts = appts.Where(p => p.AppointmentReasonID == AppointmentReasonID);
@@ -61,68 +65,40 @@ namespace MedicalOffice.Controllers
             if (numberFilters != 0)
             {
                 ViewData["Filtering"] = " btn-danger";
-                ViewData["numberFilters"] = "(" + numberFilters.ToString()
-                    + " Filter" + (numberFilters > 1 ? "s" : "") + " Applied)";
-
+                ViewData["numberFilters"] = "(" + numberFilters.ToString() + " Filter" + (numberFilters > 1 ? "s" : "") + " Applied)";
             }
-            if (!String.IsNullOrEmpty(actionButton)) 
+
+            // Handles sorting
+            if (!String.IsNullOrEmpty(actionButton))
             {
                 page = 1;
 
                 if (sortOptions.Contains(actionButton))
                 {
-                    if (actionButton == sortField) 
+                    if (actionButton == sortField)
                     {
                         sortDirection = sortDirection == "asc" ? "desc" : "asc";
                     }
                     sortField = actionButton;
                 }
             }
-            
+
             if (sortField == "Appt. Reason")
             {
-                if (sortDirection == "asc")
-                {
-                    appts = appts
-                        .OrderBy(p => p.AppointmentReason.ReasonName);
-                }
-                else
-                {
-                    appts = appts
-                        .OrderByDescending(p => p.AppointmentReason.ReasonName);
-                }
+                appts = sortDirection == "asc" ? appts.OrderBy(p => p.AppointmentReason.ReasonName) : appts.OrderByDescending(p => p.AppointmentReason.ReasonName);
             }
             else if (sortField == "Extra Fees")
             {
-                if (sortDirection == "asc")
-                {
-                    appts = appts
-                        .OrderBy(p => p.ExtraFee);
-                }
-                else
-                {
-                    appts = appts
-                        .OrderByDescending(p => p.ExtraFee);
-                }
+                appts = sortDirection == "asc" ? appts.OrderBy(p => p.ExtraFee) : appts.OrderByDescending(p => p.ExtraFee);
             }
-            else //Appointment Date
+            else
             {
-                if (sortDirection == "asc")
-                {
-                    appts = appts
-                        .OrderByDescending(p => p.StartTime);
-                }
-                else
-                {
-                    appts = appts
-                        .OrderBy(p => p.StartTime);
-                }
+                appts = sortDirection == "asc" ? appts.OrderByDescending(p => p.StartTime) : appts.OrderBy(p => p.StartTime);
             }
-            //Set sort for next time
             ViewData["sortField"] = sortField;
             ViewData["sortDirection"] = sortDirection;
 
-            
+            // Retrieves the patient details
             Patient patient = await _context.Patients
                 .Include(p => p.Doctor)
                 .Include(p => p.MedicalTrial)
@@ -134,7 +110,7 @@ namespace MedicalOffice.Controllers
 
             ViewBag.Patient = patient;
 
-            //Handle Paging
+            // Handles pagination
             int pageSize = PageSizeHelper.SetPageSize(HttpContext, pageSizeID, ControllerName());
             ViewData["pageSizeID"] = PageSizeHelper.PageSizeList(pageSize);
 
@@ -143,8 +119,8 @@ namespace MedicalOffice.Controllers
             return View(pagedData);
         }
 
-
         // GET: PatientAppointment/Add
+        // Displays the form to add a new appointment for a specific patient
         public IActionResult Add(int? PatientID, string PatientName)
         {
             if (!PatientID.HasValue)
@@ -163,12 +139,9 @@ namespace MedicalOffice.Controllers
         }
 
         // POST: PatientAppointment/Add
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add([Bind("StartTime,EndTime,Notes,ExtraFee,DoctorID," +
-            "PatientID,AppointmentReasonID")] Appointment appointment, string PatientName)
+        public async Task<IActionResult> Add([Bind("StartTime,EndTime,Notes,ExtraFee,DoctorID,PatientID,AppointmentReasonID")] Appointment appointment, string PatientName)
         {
             try
             {
@@ -181,8 +154,7 @@ namespace MedicalOffice.Controllers
             }
             catch (DbUpdateException)
             {
-                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem " +
-                    "persists see your system administrator.");
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
 
             PopulateDropDownLists(appointment);
@@ -191,6 +163,7 @@ namespace MedicalOffice.Controllers
         }
 
         // GET: PatientAppointment/Update/5
+        // Displays the form to update a specific appointment
         public async Task<IActionResult> Update(int? id)
         {
             if (id == null || _context.Appointments == null)
@@ -214,8 +187,6 @@ namespace MedicalOffice.Controllers
         }
 
         // POST: PatientAppointment/Update/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(int id)
@@ -225,16 +196,12 @@ namespace MedicalOffice.Controllers
                 .Include(a => a.Patient)
                 .FirstOrDefaultAsync(m => m.ID == id);
 
-            
             if (appointmentToUpdate == null)
             {
                 return NotFound();
             }
 
-            
-            if (await TryUpdateModelAsync<Appointment>(appointmentToUpdate, "",
-                a => a.StartTime, a => a.EndTime, a => a.Notes, a => a.ExtraFee,
-                a => a.DoctorID, a => a.AppointmentReasonID))
+            if (await TryUpdateModelAsync<Appointment>(appointmentToUpdate, "", a => a.StartTime, a => a.EndTime, a => a.Notes, a => a.ExtraFee, a => a.DoctorID, a => a.AppointmentReasonID))
             {
                 try
                 {
@@ -242,7 +209,6 @@ namespace MedicalOffice.Controllers
                     await _context.SaveChangesAsync();
                     return Redirect(ViewData["returnURL"].ToString());
                 }
-
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!AppointmentExists(appointmentToUpdate.ID))
@@ -256,17 +222,15 @@ namespace MedicalOffice.Controllers
                 }
                 catch (DbUpdateException)
                 {
-                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem " +
-                        "persists see your system administrator.");
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
                 }
             }
             PopulateDropDownLists(appointmentToUpdate);
             return View(appointmentToUpdate);
-
-
         }
 
         // GET: PatientAppointment/Remove/5
+        // Displays the form to confirm removal of a specific appointment
         public async Task<IActionResult> Remove(int? id)
         {
             if (id == null || _context.Appointments == null)
@@ -295,7 +259,7 @@ namespace MedicalOffice.Controllers
         {
             if (_context.Appointments == null)
             {
-                return Problem("Entity set 'MedicalOfficeContext.Appointments'  is null.");
+                return Problem("Entity set 'MedicalOfficeContext.Appointments' is null.");
             }
 
             var appointment = await _context.Appointments
@@ -312,35 +276,37 @@ namespace MedicalOffice.Controllers
             }
             catch (Exception)
             {
-                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem " +
-                    "persists see your system administrator.");
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
 
             return View(appointment);
         }
 
+        // Retrieves a SelectList of appointment reasons
         private SelectList AppointmentReasonSelectList(int? id)
         {
-            var dQuery = from d in _context.AppointmentReasons
-                         orderby d.ReasonName
-                         select d;
+            var dQuery = from d in _context.AppointmentReasons orderby d.ReasonName select d;
             return new SelectList(dQuery, "ID", "ReasonName", id);
         }
+
+        // Retrieves a SelectList of doctors
         private SelectList DoctorSelectList(int? id)
         {
-            var dQuery = from d in _context.Doctors
-                         orderby d.LastName, d.FirstName
-                         select d;
+            var dQuery = from d in _context.Doctors orderby d.LastName, d.FirstName select d;
             return new SelectList(dQuery, "ID", "FormalName", id);
         }
+
+        // Populates dropdown lists for appointment reasons and doctors
         private void PopulateDropDownLists(Appointment appointment = null)
         {
             ViewData["AppointmentReasonID"] = AppointmentReasonSelectList(appointment?.AppointmentReasonID);
             ViewData["DoctorID"] = DoctorSelectList(appointment?.DoctorID);
         }
+
+        // Checks if an appointment exists in the database
         private bool AppointmentExists(int id)
         {
-          return _context.Appointments.Any(e => e.ID == id);
+            return _context.Appointments.Any(e => e.ID == id);
         }
     }
 }

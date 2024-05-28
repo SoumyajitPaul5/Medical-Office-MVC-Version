@@ -7,8 +7,10 @@ namespace MedicalOffice.Models
     {
         public int ID { get; set; }
 
+        // Summary property to display full name of the doctor.
         public string Summary => FullName;
 
+        // Computed property for the full name of the doctor.
         [Display(Name = "Doctor")]
         public string FullName
         {
@@ -21,6 +23,7 @@ namespace MedicalOffice.Models
             }
         }
 
+        // Computed property for the formal name of the doctor.
         public string FormalName
         {
             get
@@ -31,31 +34,40 @@ namespace MedicalOffice.Models
             }
         }
 
+        // First name of the doctor.
         [Display(Name = "First Name")]
         [Required(ErrorMessage = "You cannot leave the first name blank.")]
         [StringLength(50, ErrorMessage = "First name cannot be more than 50 characters long.")]
         public string FirstName { get; set; }
 
+        // Middle name of the doctor.
         [Display(Name = "Middle Name")]
         [StringLength(50, ErrorMessage = "Middle name cannot be more than 50 characters long.")]
         public string MiddleName { get; set; }
 
+        // Last name of the doctor.
         [Display(Name = "Last Name")]
         [Required(ErrorMessage = "You cannot leave the last name blank.")]
         [StringLength(100, ErrorMessage = "Last name cannot be more than 100 characters long.")]
         public string LastName { get; set; }
 
+        // City where the doctor first qualified.
         [Display(Name = "City")]
         [Range(1, int.MaxValue, ErrorMessage = "You must select the City where the Doctor first qualified.")]
         public int? CityID { get; set; }
         public City City { get; set; }
 
+        // Navigation property for related patients.
         public ICollection<Patient> Patients { get; set; } = new HashSet<Patient>();
+
+        // Navigation property for related appointments.
         public ICollection<Appointment> Appointments { get; set; } = new HashSet<Appointment>();
 
+        // Navigation property for related specialties.
         [Display(Name = "Specialties")]
         public ICollection<DoctorSpecialty> DoctorSpecialties { get; set; } = new HashSet<DoctorSpecialty>();
 
+        // Navigation property for related documents.
         [Display(Name = "Documents")]
         public ICollection<DoctorDocument> DoctorDocuments { get; set; } = new HashSet<DoctorDocument>();
     }

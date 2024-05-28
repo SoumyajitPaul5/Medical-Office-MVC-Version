@@ -36,8 +36,6 @@ namespace MedicalOffice.Controllers
         }
 
         // POST: Condition/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,ConditionName")] Condition condition)
@@ -46,6 +44,7 @@ namespace MedicalOffice.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    // Add new condition to the database
                     _context.Add(condition);
                     await _context.SaveChangesAsync();
                     return Redirect(ViewData["returnURL"].ToString());
@@ -53,6 +52,7 @@ namespace MedicalOffice.Controllers
             }
             catch (DbUpdateException)
             {
+                // Handle database update exceptions
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
 
@@ -67,6 +67,7 @@ namespace MedicalOffice.Controllers
                 return NotFound();
             }
 
+            // Get the condition to edit
             var condition = await _context.Conditions.FindAsync(id);
             if (condition == null)
             {
@@ -76,30 +77,28 @@ namespace MedicalOffice.Controllers
         }
 
         // POST: Condition/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id)
         {
-            var conditionToUpdate = await _context.Conditions
-                .FirstOrDefaultAsync(m => m.ID == id);
+            var conditionToUpdate = await _context.Conditions.FirstOrDefaultAsync(m => m.ID == id);
 
             if (conditionToUpdate == null)
             {
                 return NotFound();
             }
 
-            if (await TryUpdateModelAsync<Condition>(conditionToUpdate, "",
-                d => d.ConditionName))
+            if (await TryUpdateModelAsync<Condition>(conditionToUpdate, "", d => d.ConditionName))
             {
                 try
                 {
+                    // Save changes to the condition
                     await _context.SaveChangesAsync();
                     return Redirect(ViewData["returnURL"].ToString());
                 }
                 catch (DbUpdateConcurrencyException)
                 {
+                    // Handle concurrency exceptions
                     if (!ConditionExists(conditionToUpdate.ID))
                     {
                         return NotFound();
@@ -111,6 +110,7 @@ namespace MedicalOffice.Controllers
                 }
                 catch (DbUpdateException)
                 {
+                    // Handle database update exceptions
                     ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
                 }
             }
@@ -125,8 +125,8 @@ namespace MedicalOffice.Controllers
                 return NotFound();
             }
 
-            var condition = await _context.Conditions
-                .FirstOrDefaultAsync(m => m.ID == id);
+            // Get the condition to delete
+            var condition = await _context.Conditions.FirstOrDefaultAsync(m => m.ID == id);
             if (condition == null)
             {
                 return NotFound();
@@ -142,12 +142,12 @@ namespace MedicalOffice.Controllers
         {
             if (_context.Conditions == null)
             {
-                return Problem("Entity set 'MedicalOfficeContext.Conditions'  is null.");
+                return Problem("Entity set 'MedicalOfficeContext.Conditions' is null.");
             }
-            var condition = await _context.Conditions
-               .FirstOrDefaultAsync(m => m.ID == id);
+            var condition = await _context.Conditions.FirstOrDefaultAsync(m => m.ID == id);
             try
             {
+                // Delete the condition
                 if (condition != null)
                 {
                     _context.Conditions.Remove(condition);
@@ -157,6 +157,7 @@ namespace MedicalOffice.Controllers
             }
             catch (DbUpdateException dex)
             {
+                // Handle database update exceptions
                 if (dex.GetBaseException().Message.Contains("FOREIGN KEY constraint failed"))
                 {
                     ModelState.AddModelError("", "Unable to Delete " + ViewData["ControllerFriendlyName"] +
@@ -168,12 +169,12 @@ namespace MedicalOffice.Controllers
                 }
             }
             return View(condition);
-
         }
 
+        // Helper method to check if a condition exists
         private bool ConditionExists(int id)
         {
-          return _context.Conditions.Any(e => e.ID == id);
+            return _context.Conditions.Any(e => e.ID == id);
         }
     }
 }

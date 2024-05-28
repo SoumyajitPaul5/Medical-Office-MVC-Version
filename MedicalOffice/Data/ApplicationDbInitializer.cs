@@ -14,7 +14,7 @@ namespace MedicalOffice.Data
             {
                 context.Database.Migrate();
 
-                //Create Roles
+                //Creating Roles
                 var RoleManager = applicationBuilder.ApplicationServices.CreateScope()
                     .ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
                 string[] roleNames = { "Admin", "Supervisor" };
@@ -27,7 +27,7 @@ namespace MedicalOffice.Data
                         roleResult = await RoleManager.CreateAsync(new IdentityRole(roleName));
                     }
                 }
-                //Create Users
+                //Creating Users
                 var userManager = applicationBuilder.ApplicationServices.CreateScope()
                     .ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
                 if (userManager.FindByEmailAsync("admin@outlook.com").Result == null)

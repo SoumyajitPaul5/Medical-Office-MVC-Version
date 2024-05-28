@@ -3,29 +3,30 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace MedicalOffice.CustomControllers
 {
-
     public class CognizantController : Controller
     {
+        // Retrieve the name of the current controller
         internal string ControllerName()
         {
             return ControllerContext.RouteData.Values["controller"].ToString();
         }
+
+        // Retrieve the name of the current action
         internal string ActionName()
         {
             return ControllerContext.RouteData.Values["action"].ToString();
         }
 
+        // Convert CamelCase to a more readable format with spaces
         internal static string SplitCamelCase(string input)
         {
             return System.Text.RegularExpressions.Regex
-                .Replace(input, "([A-Z])", " $1",
-                System.Text.RegularExpressions.RegexOptions.Compiled).Trim();
+                .Replace(input, "([A-Z])", " $1", System.Text.RegularExpressions.RegexOptions.Compiled).Trim();
         }
 
- 
+        // Set ViewData values before the action executes
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            //Add the Controller and Action names to ViewData
             ViewData["ControllerName"] = ControllerName();
             ViewData["ControllerFriendlyName"] = SplitCamelCase(ControllerName());
             ViewData["ActionName"] = ActionName();
@@ -33,12 +34,9 @@ namespace MedicalOffice.CustomControllers
             base.OnActionExecuting(context);
         }
 
-
-        public override Task OnActionExecutionAsync(
-            ActionExecutingContext context,
-            ActionExecutionDelegate next)
+        // Set ViewData values asynchronously before the action executes
+        public override Task OnActionExecutionAsync(ActionExecutingContext context, ActionExecutionDelegate next)
         {
-            //Add the Controller and Action names to ViewData
             ViewData["ControllerName"] = ControllerName();
             ViewData["ControllerFriendlyName"] = SplitCamelCase(ControllerName());
             ViewData["ActionName"] = ActionName();
@@ -46,5 +44,4 @@ namespace MedicalOffice.CustomControllers
             return base.OnActionExecutionAsync(context, next);
         }
     }
-
 }

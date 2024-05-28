@@ -27,18 +27,19 @@ namespace MedicalOffice.Controllers
         // GET: AppointmentReason
         public IActionResult Index()
         {
+            // Redirect to the return URL stored in ViewData
             return Redirect(ViewData["returnURL"].ToString());
         }
 
         // GET: AppointmentReason/Create
         public IActionResult Create()
         {
+            // Display the create view for appointment reasons
             return View();
         }
 
         // POST: AppointmentReason/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,ReasonName")] AppointmentReason appointmentReason)
@@ -47,6 +48,7 @@ namespace MedicalOffice.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    // Add new appointment reason to the database
                     _context.Add(appointmentReason);
                     await _context.SaveChangesAsync();
                     return Redirect(ViewData["returnURL"].ToString());
@@ -54,6 +56,7 @@ namespace MedicalOffice.Controllers
             }
             catch (DbUpdateException)
             {
+                // Handle database update exceptions
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
 
@@ -68,6 +71,7 @@ namespace MedicalOffice.Controllers
                 return NotFound();
             }
 
+            // Get the appointment reason to edit
             var appointmentReason = await _context.AppointmentReasons.FindAsync(id);
             if (appointmentReason == null)
             {
@@ -78,29 +82,28 @@ namespace MedicalOffice.Controllers
 
         // POST: AppointmentReason/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id)
         {
-            var appointmentReasonToUpdate = await _context.AppointmentReasons
-                .FirstOrDefaultAsync(p => p.ID == id);
+            var appointmentReasonToUpdate = await _context.AppointmentReasons.FirstOrDefaultAsync(p => p.ID == id);
 
             if (appointmentReasonToUpdate == null)
             {
                 return NotFound();
             }
 
-            if (await TryUpdateModelAsync<AppointmentReason>(appointmentReasonToUpdate, "",
-                d => d.ReasonName))
+            if (await TryUpdateModelAsync<AppointmentReason>(appointmentReasonToUpdate, "", d => d.ReasonName))
             {
                 try
                 {
+                    // Save changes to the appointment reason
                     await _context.SaveChangesAsync();
                     return Redirect(ViewData["returnURL"].ToString());
                 }
                 catch (DbUpdateConcurrencyException)
                 {
+                    // Handle concurrency exceptions
                     if (!AppointmentReasonExists(appointmentReasonToUpdate.ID))
                     {
                         return NotFound();
@@ -112,6 +115,7 @@ namespace MedicalOffice.Controllers
                 }
                 catch (DbUpdateException)
                 {
+                    // Handle database update exceptions
                     ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
                 }
             }
@@ -126,8 +130,8 @@ namespace MedicalOffice.Controllers
                 return NotFound();
             }
 
-            var appointmentReason = await _context.AppointmentReasons
-                .FirstOrDefaultAsync(m => m.ID == id);
+            // Get the appointment reason to delete
+            var appointmentReason = await _context.AppointmentReasons.FirstOrDefaultAsync(m => m.ID == id);
             if (appointmentReason == null)
             {
                 return NotFound();
@@ -143,12 +147,12 @@ namespace MedicalOffice.Controllers
         {
             if (_context.AppointmentReasons == null)
             {
-                return Problem("Entity set 'MedicalOfficeContext.AppointmentReasons'  is null.");
+                return Problem("Entity set 'MedicalOfficeContext.AppointmentReasons' is null.");
             }
-            var appointmentReason = await _context.AppointmentReasons
-                  .FirstOrDefaultAsync(m => m.ID == id);
+            var appointmentReason = await _context.AppointmentReasons.FirstOrDefaultAsync(m => m.ID == id);
             try
             {
+                // Delete the appointment reason
                 if (appointmentReason != null)
                 {
                     _context.AppointmentReasons.Remove(appointmentReason);
@@ -158,6 +162,7 @@ namespace MedicalOffice.Controllers
             }
             catch (DbUpdateException dex)
             {
+                // Handle database update exceptions
                 if (dex.GetBaseException().Message.Contains("FOREIGN KEY constraint failed"))
                 {
                     ModelState.AddModelError("", "Unable to Delete " + ViewData["ControllerFriendlyName"] +
@@ -169,13 +174,13 @@ namespace MedicalOffice.Controllers
                 }
             }
             return View(appointmentReason);
-
         }
 
+        // POST: AppointmentReason/InsertFromExcel
         [HttpPost]
         public async Task<IActionResult> InsertFromExcel(IFormFile theExcel)
         {
-            
+            // Insert appointment reasons from an Excel file
             ExcelPackage excel;
             using (var memoryStream = new MemoryStream())
             {
@@ -190,7 +195,6 @@ namespace MedicalOffice.Controllers
 
             for (int row = start.Row; row <= end.Row; row++)
             {
-                // Row by row...
                 AppointmentReason a = new AppointmentReason
                 {
                     ReasonName = workSheet.Cells[row, 1].Text
@@ -199,13 +203,14 @@ namespace MedicalOffice.Controllers
             }
             _context.AppointmentReasons.AddRange(appointmentReasons);
             _context.SaveChanges();
-            
+
             return Redirect(ViewData["returnURL"].ToString());
         }
 
+        // Helper method to check if an appointment reason exists
         private bool AppointmentReasonExists(int id)
         {
-          return _context.AppointmentReasons.Any(e => e.ID == id);
+            return _context.AppointmentReasons.Any(e => e.ID == id);
         }
     }
 }

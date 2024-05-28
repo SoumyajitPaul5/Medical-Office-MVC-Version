@@ -43,7 +43,7 @@ namespace MedicalOffice.Controllers
             {
                 return new BadRequestResult();
             }
-            var _user = await _userManager.FindByIdAsync(id);//IdentityRole
+            var _user = await _userManager.FindByIdAsync(id);
             if (_user == null)
             {
                 return NotFound();
@@ -63,7 +63,7 @@ namespace MedicalOffice.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string Id, string[] selectedRoles)
         {
-            var _user = await _userManager.FindByIdAsync(Id);//IdentityRole
+            var _user = await _userManager.FindByIdAsync(Id);
             UserVM user = new UserVM
             {
                 ID = _user.Id,
@@ -85,7 +85,7 @@ namespace MedicalOffice.Controllers
         }
 
         private void PopulateAssignedRoleData(UserVM user)
-        {//Prepare checkboxes for all Roles
+        {
             var allRoles = _context.Roles;
             var currentRoles = user.UserRoles;
             var viewModel = new List<RoleVM>();
@@ -103,12 +103,11 @@ namespace MedicalOffice.Controllers
 
         private async Task UpdateUserRoles(string[] selectedRoles, UserVM userToUpdate)
         {
-            var UserRoles = userToUpdate.UserRoles;//Current roles use is in
-            var _user = await _userManager.FindByIdAsync(userToUpdate.ID);//IdentityUser
+            var UserRoles = userToUpdate.UserRoles;
+            var _user = await _userManager.FindByIdAsync(userToUpdate.ID);
 
             if (selectedRoles == null)
             {
-                //No roles selected so just remove any currently assigned
                 foreach (var r in UserRoles)
                 {
                     await _userManager.RemoveFromRoleAsync(_user, r);

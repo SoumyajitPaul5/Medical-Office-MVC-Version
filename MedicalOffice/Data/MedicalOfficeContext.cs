@@ -6,10 +6,8 @@ namespace MedicalOffice.Data
 {
     public class MedicalOfficeContext : DbContext
     {
-        //To give access to IHttpContextAccessor for Audit Data with IAuditable
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        //Property to hold the UserName value
         public string UserName
         {
             get; private set;
@@ -22,13 +20,11 @@ namespace MedicalOffice.Data
             _httpContextAccessor = httpContextAccessor;
             if (_httpContextAccessor.HttpContext != null)
             {
-                //We have a HttpContext, but there might not be anyone Authenticated
                 UserName = _httpContextAccessor.HttpContext?.User.Identity.Name;
                 UserName ??= "Unknown";
             }
             else
             {
-                //No HttpContext so seeding data
                 UserName = "Seed Data";
             }
         }
@@ -58,79 +54,79 @@ namespace MedicalOffice.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //Add a unique index to the City/Province
+            // Adding a unique index to the City/Province
             modelBuilder.Entity<City>()
             .HasIndex(c => new { c.Name, c.ProvinceID })
             .IsUnique();
 
-            //To Prevent Cascade Delete
+            // To Prevent Cascade Delete
             modelBuilder.Entity<Province>()
                 .HasMany<City>(d => d.Cities)
                 .WithOne(p => p.Province)
                 .HasForeignKey(p => p.ProvinceID)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            //For the AppointmentReasonSummaries View
+            // For the AppointmentReasonSummaries View
             modelBuilder
                 .Entity<AppointmentReasonSummaryVM>()
                 .ToView(nameof(AppointmentReasonSummaries))
                 .HasKey(a => a.ID);
 
-            //For the AppointmentSummary ViewModel
+            // For the AppointmentSummary ViewModel
             modelBuilder
                 .Entity<AppointmentSummaryVM>()
                 .ToView(nameof(AppointmentSummaries))
                 .HasKey(a => a.ID);
 
-            //Many to Many Intersection
+            // Many to Many Intersection
             modelBuilder.Entity<PatientCondition>()
             .HasKey(t => new { t.ConditionID, t.PatientID });
 
-            //Many to Many Doctor Specialty Primary Key
+            // Many to Many Doctor Specialty Primary Key
             modelBuilder.Entity<DoctorSpecialty>()
             .HasKey(t => new { t.DoctorID, t.SpecialtyID });
 
-            //To prevent Cascade Delete
+            // To prevent Cascade Delete
             modelBuilder.Entity<Specialty>()
                 .HasMany<DoctorSpecialty>(p => p.DoctorSpecialties)
                 .WithOne(c => c.Specialty)
                 .HasForeignKey(c => c.SpecialtyID)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            //Prevent Cascade Delete from Doctor to Patient
+            // Prevent Cascade Delete from Doctor to Patient
             modelBuilder.Entity<Doctor>()
                 .HasMany<Patient>(d => d.Patients)
                 .WithOne(p => p.Doctor)
                 .HasForeignKey(p => p.DoctorID)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            //To prevent Cascade Delete
+            // To prevent Cascade Delete
             modelBuilder.Entity<PatientCondition>()
                 .HasOne(pc => pc.Condition)
                 .WithMany(c => c.PatientConditions)
                 .HasForeignKey(pc => pc.ConditionID)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            //Allowing Cascade Delete from Patient to Appointment
+            // Allowing Cascade Delete from Patient to Appointment
             modelBuilder.Entity<Appointment>()
                 .HasOne(pc => pc.AppointmentReason)
                 .WithMany(c => c.Appointments)
                 .HasForeignKey(pc => pc.AppointmentReasonID)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            //From PARENT point of view
+            // From PARENT point of view
             modelBuilder.Entity<Doctor>()
                 .HasMany<Appointment>(d => d.Appointments)
                 .WithOne(p => p.Doctor)
                 .HasForeignKey(p => p.DoctorID)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            //Add a unique index to the OHIP Number
+            // Adding a unique index to the OHIP Number
             modelBuilder.Entity<Patient>()
             .HasIndex(p => p.OHIP)
             .IsUnique();
 
-            //Add a unique index to the Medical Trial Name
+            // Adding a unique index to the Medical Trial Name
             modelBuilder.Entity<MedicalTrial>()
             .HasIndex(p => p.TrialName)
             .IsUnique();

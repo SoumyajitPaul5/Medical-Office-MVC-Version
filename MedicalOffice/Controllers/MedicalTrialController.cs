@@ -14,13 +14,13 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace MedicalOffice.Controllers
 {
-    [Authorize(Roles = "Admin,Supervisor")]
+    [Authorize(Roles = "Admin,Supervisor")] // Restricts access to Admin and Supervisor roles
     public class MedicalTrialController : LookupsController
     {
-        //for sending email
         private readonly IMyEmailSender _emailSender;
         private readonly MedicalOfficeContext _context;
 
+        // Constructor to initialize the database context and email sender
         public MedicalTrialController(MedicalOfficeContext context, IMyEmailSender emailSender)
         {
             _context = context;
@@ -28,20 +28,20 @@ namespace MedicalOffice.Controllers
         }
 
         // GET: MedicalTrial
+        // Redirects to the return URL
         public IActionResult Index()
         {
             return Redirect(ViewData["returnURL"].ToString());
         }
 
         // GET: MedicalTrial/Create
+        // Displays the create view
         public IActionResult Create()
         {
             return View();
         }
 
         // POST: MedicalTrial/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,TrialName")] MedicalTrial medicalTrial)
@@ -57,6 +57,7 @@ namespace MedicalOffice.Controllers
             }
             catch (DbUpdateException dex)
             {
+                // Handles database update exceptions
                 ExceptionMessageVM msg = new();
                 if (dex.GetBaseException().Message.Contains("UNIQUE constraint failed"))
                 {
@@ -66,6 +67,7 @@ namespace MedicalOffice.Controllers
                 ModelState.AddModelError(msg.ErrProperty, msg.ErrMessage);
             }
 
+            // Handles AJAX requests with error messages
             if (!ModelState.IsValid && Request.Headers["X-Requested-With"] == "XMLHttpRequest")
             {
                 string errorMessage = "";
@@ -83,6 +85,7 @@ namespace MedicalOffice.Controllers
         }
 
         // GET: MedicalTrial/Edit/5
+        // Retrieves and displays the edit view for a specific medical trial
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.MedicalTrials == null)
@@ -99,22 +102,18 @@ namespace MedicalOffice.Controllers
         }
 
         // POST: MedicalTrial/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id)
         {
-            var medicalTrialToUpdate = await _context.MedicalTrials
-                .FirstOrDefaultAsync(m => m.ID == id);
+            var medicalTrialToUpdate = await _context.MedicalTrials.FirstOrDefaultAsync(m => m.ID == id);
 
             if (medicalTrialToUpdate == null)
             {
                 return NotFound();
             }
 
-            if (await TryUpdateModelAsync<MedicalTrial>(medicalTrialToUpdate, "",
-                d => d.TrialName))
+            if (await TryUpdateModelAsync<MedicalTrial>(medicalTrialToUpdate, "", d => d.TrialName))
             {
                 try
                 {
@@ -134,6 +133,7 @@ namespace MedicalOffice.Controllers
                 }
                 catch (DbUpdateException dex)
                 {
+                    // Handles database update exceptions
                     ExceptionMessageVM msg = new();
                     if (dex.GetBaseException().Message.Contains("UNIQUE constraint failed"))
                     {
@@ -147,6 +147,7 @@ namespace MedicalOffice.Controllers
         }
 
         // GET: MedicalTrial/Delete/5
+        // Retrieves and displays the delete view for a specific medical trial
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.MedicalTrials == null)
@@ -154,8 +155,7 @@ namespace MedicalOffice.Controllers
                 return NotFound();
             }
 
-            var medicalTrial = await _context.MedicalTrials
-                .FirstOrDefaultAsync(m => m.ID == id);
+            var medicalTrial = await _context.MedicalTrials.FirstOrDefaultAsync(m => m.ID == id);
             if (medicalTrial == null)
             {
                 return NotFound();
@@ -171,10 +171,9 @@ namespace MedicalOffice.Controllers
         {
             if (_context.MedicalTrials == null)
             {
-                return Problem("Entity set 'MedicalOfficeContext.MedicalTrials'  is null.");
+                return Problem("Entity set 'MedicalOfficeContext.MedicalTrials' is null.");
             }
-            var medicalTrial = await _context.MedicalTrials
-                   .FirstOrDefaultAsync(m => m.ID == id);
+            var medicalTrial = await _context.MedicalTrials.FirstOrDefaultAsync(m => m.ID == id);
             try
             {
                 if (medicalTrial != null)
@@ -186,6 +185,7 @@ namespace MedicalOffice.Controllers
             }
             catch (DbUpdateException dex)
             {
+                // Handles foreign key constraint exceptions
                 if (dex.GetBaseException().Message.Contains("FOREIGN KEY constraint failed"))
                 {
                     ModelState.AddModelError("", "Unable to Delete " + ViewData["ControllerFriendlyName"] +
@@ -197,10 +197,10 @@ namespace MedicalOffice.Controllers
                 }
             }
             return View(medicalTrial);
-
         }
 
         // GET/POST: MedicalTrial/Notification/5
+        // Handles sending notification emails to patients in a specific medical trial
         public async Task<IActionResult> Notification(int? id, string Subject, string emailContent)
         {
             if (id == null)
@@ -221,7 +221,7 @@ namespace MedicalOffice.Controllers
                 int folksCount = 0;
                 try
                 {
-                    //Send a Notice.
+                    // Retrieves the list of patients in the medical trial
                     List<EmailAddress> folks = (from p in _context.Patients
                                                 where p.MedicalTrialID == id
                                                 select new EmailAddress
@@ -232,35 +232,34 @@ namespace MedicalOffice.Controllers
                     folksCount = folks.Count;
                     if (folksCount > 0)
                     {
+                        // Sends the email notification
                         var msg = new EmailMessage()
                         {
                             ToAddresses = folks,
                             Subject = Subject,
                             Content = "<p>" + emailContent + "</p><p>Please access the <strong>Niagara College</strong> web site to review.</p>"
-
                         };
                         await _emailSender.SendToManyAsync(msg);
-                        ViewData["Message"] = "Message sent to " + folksCount + " Patient"
-                            + ((folksCount == 1) ? "." : "s.");
+                        ViewData["Message"] = "Message sent to " + folksCount + " Patient" + ((folksCount == 1) ? "." : "s.");
                     }
                     else
                     {
-                        ViewData["Message"] = "Message NOT sent!  No Patients in medical trial.";
+                        ViewData["Message"] = "Message NOT sent! No Patients in medical trial.";
                     }
                 }
                 catch (Exception ex)
                 {
                     string errMsg = ex.GetBaseException().Message;
-                    ViewData["Message"] = "Error: Could not send email message to the " + folksCount + " Patient"
-                        + ((folksCount == 1) ? "" : "s") + " in the trial.";
+                    ViewData["Message"] = "Error: Could not send email message to the " + folksCount + " Patient" + ((folksCount == 1) ? "" : "s") + " in the trial.";
                 }
             }
             return View();
         }
 
+        // Checks if a medical trial exists in the database
         private bool MedicalTrialExists(int id)
         {
-          return _context.MedicalTrials.Any(e => e.ID == id);
+            return _context.MedicalTrials.Any(e => e.ID == id);
         }
     }
 }

@@ -20,11 +20,14 @@ namespace MedicalOffice.Controllers
         {
             _context = context;
         }
+
+        // Displays the index page for reports
         public IActionResult Index()
         {
             return View();
         }
 
+        // Generates an Excel file with appointment details and downloads it
         public IActionResult DownloadAppointments()
         {
             var appts = from a in _context.Appointments
@@ -44,23 +47,19 @@ namespace MedicalOffice.Controllers
                         };
             int numRows = appts.Count();
 
-            if (numRows > 0) 
+            if (numRows > 0)
             {
                 using (ExcelPackage excel = new ExcelPackage())
                 {
-
-
                     var workSheet = excel.Workbook.Worksheets.Add("Appointments");
 
                     workSheet.Cells[3, 1].LoadFromCollection(appts, true);
 
                     workSheet.Column(1).Style.Numberformat.Format = "yyyy-mm-dd";
-
                     workSheet.Column(4).Style.Numberformat.Format = "###,##0.00";
-
                     workSheet.Cells[4, 1, numRows + 3, 2].Style.Font.Bold = true;
 
-                    using (ExcelRange totalfees = workSheet.Cells[numRows + 4, 4])//
+                    using (ExcelRange totalfees = workSheet.Cells[numRows + 4, 4])
                     {
                         totalfees.Formula = "Sum(" + workSheet.Cells[4, 4].Address + ":" + workSheet.Cells[numRows + 3, 4].Address + ")";
                         totalfees.Style.Font.Bold = true;
@@ -95,8 +94,8 @@ namespace MedicalOffice.Controllers
                     workSheet.Cells[1, 1].Value = "Appointment Report";
                     using (ExcelRange Rng = workSheet.Cells[1, 1, 1, 6])
                     {
-                        Rng.Merge = true; 
-                        Rng.Style.Font.Bold = true; 
+                        Rng.Merge = true;
+                        Rng.Style.Font.Bold = true;
                         Rng.Style.Font.Size = 18;
                         Rng.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
                     }
@@ -109,11 +108,10 @@ namespace MedicalOffice.Controllers
                     {
                         Rng.Value = "Created: " + localDate.ToShortTimeString() + " on " +
                             localDate.ToShortDateString();
-                        Rng.Style.Font.Bold = true; 
+                        Rng.Style.Font.Bold = true;
                         Rng.Style.Font.Size = 12;
                         Rng.Style.HorizontalAlignment = ExcelHorizontalAlignment.Right;
                     }
-
 
                     try
                     {
@@ -131,9 +129,9 @@ namespace MedicalOffice.Controllers
             return NotFound("No data.");
         }
 
+        // Displays a paginated summary of appointments
         public async Task<IActionResult> AppointmentSummary(int? page, int? pageSizeID)
         {
-
             var sumQ = _context.AppointmentSummaries
                         .OrderBy(a => a.LastName)
                         .ThenBy(a => a.FirstName)
@@ -146,6 +144,7 @@ namespace MedicalOffice.Controllers
             return View(pagedData);
         }
 
+        // Displays a paginated summary of appointment reasons
         public async Task<IActionResult> AppointmentReasonSummary(int? page, int? pageSizeID)
         {
             var sumQ = _context.AppointmentReasonSummaries
