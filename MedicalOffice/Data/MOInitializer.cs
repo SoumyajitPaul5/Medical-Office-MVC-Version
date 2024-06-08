@@ -15,7 +15,7 @@ namespace MedicalOffice.Data
             {
                 //context.Database.EnsureDeleted();
                 //context.Database.EnsureCreated();
-                context.Database.Migrate();
+                //context.Database.Migrate();
 
                 //To randomly generate data
                 Random random = new Random();

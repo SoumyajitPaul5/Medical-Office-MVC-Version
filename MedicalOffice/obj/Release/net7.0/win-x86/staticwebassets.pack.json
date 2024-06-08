@@ -1,0 +1,313 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\obj\\Release\\net7.0\\win-x86\\scopedcss\\projectbundle\\MedicalOffice.bundle.scp.css",
+      "PackagePath": "staticwebassets\\MedicalOffice.bundle.scp.css"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\images\\blankProfile.jpg",
+      "PackagePath": "staticwebassets\\images\\blankProfile.jpg"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\images\\mo_icon192x192.png",
+      "PackagePath": "staticwebassets\\images\\mo_icon192x192.png"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\images\\mo_icon512x512.png",
+      "PackagePath": "staticwebassets\\images\\mo_icon512x512.png"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\images\\screenshot1.jpg",
+      "PackagePath": "staticwebassets\\images\\screenshot1.jpg"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\images\\screenshot1n.jpg",
+      "PackagePath": "staticwebassets\\images\\screenshot1n.jpg"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\images\\screenshot2.jpg",
+      "PackagePath": "staticwebassets\\images\\screenshot2.jpg"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\images\\screenshot2n.jpg",
+      "PackagePath": "staticwebassets\\images\\screenshot2n.jpg"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\js\\multiselect.js",
+      "PackagePath": "staticwebassets\\js\\multiselect.js"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\js\\refreshDDL.js",
+      "PackagePath": "staticwebassets\\js\\refreshDDL.js"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\manifest.json",
+      "PackagePath": "staticwebassets\\manifest.json"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\offline.html",
+      "PackagePath": "staticwebassets\\offline.html"
+    },
+    {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\sw.js",
+      "PackagePath": "staticwebassets\\sw.js"
+    },
+    {
+      "Id": "obj\\Release\\net7.0\\win-x86\\staticwebassets\\msbuild.MedicalOffice.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Release\\net7.0\\win-x86\\staticwebassets\\msbuild.build.MedicalOffice.props",
+      "PackagePath": "build\\MedicalOffice.props"
+    },
+    {
+      "Id": "obj\\Release\\net7.0\\win-x86\\staticwebassets\\msbuild.buildMultiTargeting.MedicalOffice.props",
+      "PackagePath": "buildMultiTargeting\\MedicalOffice.props"
+    },
+    {
+      "Id": "obj\\Release\\net7.0\\win-x86\\staticwebassets\\msbuild.buildTransitive.MedicalOffice.props",
+      "PackagePath": "buildTransitive\\MedicalOffice.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

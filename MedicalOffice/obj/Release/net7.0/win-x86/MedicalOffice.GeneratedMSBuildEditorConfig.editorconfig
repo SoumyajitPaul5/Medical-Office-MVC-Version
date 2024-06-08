@@ -1,0 +1,303 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = MedicalOffice
+build_property.RootNamespace = MedicalOffice
+build_property.ProjectDir = D:\IT HELP\3 Git Projects\Medical Office\MedicalOffice\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\IT HELP\3 Git Projects\Medical Office\MedicalOffice
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Areas/Identity/Pages/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Areas/Identity/Pages/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Areas/Identity/Pages/Account/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcQWNjb3VudFxfVmlld0ltcG9ydHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Areas/Identity/Pages/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZhbGlkYXRpb25TY3JpcHRzUGFydGlhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Areas/Identity/Pages/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Areas/Identity/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/AppointmentReason/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwb2ludG1lbnRSZWFzb25cQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/AppointmentReason/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwb2ludG1lbnRSZWFzb25cRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/AppointmentReason/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwb2ludG1lbnRSZWFzb25cRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Appointment/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwb2ludG1lbnRcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Appointment/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwb2ludG1lbnRcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Appointment/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwb2ludG1lbnRcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Appointment/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwb2ludG1lbnRcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Appointment/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXBwb2ludG1lbnRcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Condition/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uZGl0aW9uXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Condition/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uZGl0aW9uXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Condition/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ29uZGl0aW9uXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Doctor/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Doctor/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Doctor/Details - Copy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXERldGFpbHMgLSBDb3B5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Doctor/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Doctor/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Doctor/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Doctor/IndexAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXEluZGV4QWRtaW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Doctor/IndexSupervisor.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXEluZGV4U3VwZXJ2aXNvci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Doctor/_addSpecialtyModal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXF9hZGRTcGVjaWFsdHlNb2RhbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Doctor/_ListOfDocuments.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXF9MaXN0T2ZEb2N1bWVudHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Doctor/_ListOfPatients.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXF9MaXN0T2ZQYXRpZW50cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Doctor/_ListOfSpecialities.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXF9MaXN0T2ZTcGVjaWFsaXRpZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Doctor/_SpecialtyCreate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRG9jdG9yXF9TcGVjaWFsdHlDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Lookup/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9va3VwXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Lookup/_AppointmentReason.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9va3VwXF9BcHBvaW50bWVudFJlYXNvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Lookup/_Condition.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9va3VwXF9Db25kaXRpb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Lookup/_MedicalTrial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9va3VwXF9NZWRpY2FsVHJpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Lookup/_Specialty.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9va3VwXF9TcGVjaWFsdHkuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/MedicalTrial/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVkaWNhbFRyaWFsXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/MedicalTrial/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVkaWNhbFRyaWFsXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/MedicalTrial/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVkaWNhbFRyaWFsXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/MedicalTrial/Notification.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWVkaWNhbFRyaWFsXE5vdGlmaWNhdGlvbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/PatientAppointment/Add.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudEFwcG9pbnRtZW50XEFkZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/PatientAppointment/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudEFwcG9pbnRtZW50XERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/PatientAppointment/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudEFwcG9pbnRtZW50XEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/PatientAppointment/Remove.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudEFwcG9pbnRtZW50XFJlbW92ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/PatientAppointment/Update.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudEFwcG9pbnRtZW50XFVwZGF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/PatientAppointment/_PatientDetail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudEFwcG9pbnRtZW50XF9QYXRpZW50RGV0YWlsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Patient/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudFxDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Patient/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudFxEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Patient/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudFxEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Patient/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudFxFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Patient/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Patient/_addMedicalTrialModal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudFxfYWRkTWVkaWNhbFRyaWFsTW9kYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Patient/_MedicalTrialCreate.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF0aWVudFxfTWVkaWNhbFRyaWFsQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Report/AppointmentReasonSummary.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0XEFwcG9pbnRtZW50UmVhc29uU3VtbWFyeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Report/AppointmentSummary.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmVwb3J0XEFwcG9pbnRtZW50U3VtbWFyeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Shared/_BackToList.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9CYWNrVG9MaXN0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Shared/_LoginPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Shared/_PageSizeModal.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QYWdlU2l6ZU1vZGFsLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Shared/_PagingNavBar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9QYWdpbmdOYXZCYXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Shared/_ViewHeading.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WaWV3SGVhZGluZy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Specialty/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3BlY2lhbHR5XENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Specialty/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3BlY2lhbHR5XERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Specialty/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3BlY2lhbHR5XEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/UserRole/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclJvbGVcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/UserRole/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclJvbGVcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/IT HELP/3 Git Projects/Medical Office/MedicalOffice/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-2006hmzx23
