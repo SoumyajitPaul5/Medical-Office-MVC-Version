@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MedicalOffice")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+35afab8cd21a11ef759ca8f23e2f7e13bd216b17")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+346ff0c887104a65a0f103929e756dd09155249f")]
 [assembly: System.Reflection.AssemblyProductAttribute("MedicalOffice")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MedicalOffice")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\images\\Background.jpg",
+      "PackagePath": "staticwebassets\\images\\Background.jpg"
+    },
+    {
       "Id": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\images\\blankProfile.jpg",
       "PackagePath": "staticwebassets\\images\\blankProfile.jpg"
     },

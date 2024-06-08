@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "nyFf4KfWWUrOp/B4DULE5tKRtqg2EVvrztNC9GMn00A=",
+  "Hash": "N0ZI/s3FXuU6J5IwGGSWjFwadLw36DUy8PFyAgNJCsk=",
   "Source": "MedicalOffice",
   "BasePath": "_content/MedicalOffice",
   "Mode": "Default",
@@ -1231,6 +1231,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\images\\Background.jpg",
+      "SourceId": "MedicalOffice",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\",
+      "BasePath": "_content/MedicalOffice",
+      "RelativePath": "images/Background.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\Background.jpg"
     },
     {
       "Identity": "D:\\IT HELP\\3 Git Projects\\Medical Office\\MedicalOffice\\wwwroot\\images\\blankProfile.jpg",

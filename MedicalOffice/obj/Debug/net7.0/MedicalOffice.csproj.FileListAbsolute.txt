@@ -392,6 +392,7 @@ D:\IT HELP\3 Git Projects\Medical Office\MedicalOffice\bin\Debug\net7.0\System.C
 D:\IT HELP\3 Git Projects\Medical Office\MedicalOffice\bin\Debug\net7.0\System.Composition.TypedParts.dll
 D:\IT HELP\3 Git Projects\Medical Office\MedicalOffice\bin\Debug\net7.0\System.Configuration.ConfigurationManager.dll
 D:\IT HELP\3 Git Projects\Medical Office\MedicalOffice\bin\Debug\net7.0\System.Drawing.Common.dll
+D:\IT HELP\3 Git Projects\Medical Office\MedicalOffice\bin\Debug\net7.0\System.Formats.Asn1.dll
 D:\IT HELP\3 Git Projects\Medical Office\MedicalOffice\bin\Debug\net7.0\System.IdentityModel.Tokens.Jwt.dll
 D:\IT HELP\3 Git Projects\Medical Office\MedicalOffice\bin\Debug\net7.0\System.Memory.Data.dll
 D:\IT HELP\3 Git Projects\Medical Office\MedicalOffice\bin\Debug\net7.0\System.Reflection.MetadataLoadContext.dll
@@ -606,4 +607,3 @@ D:\IT HELP\3 Git Projects\Medical Office\MedicalOffice\obj\Debug\net7.0\refint\M
 D:\IT HELP\3 Git Projects\Medical Office\MedicalOffice\obj\Debug\net7.0\MedicalOffice.pdb
 D:\IT HELP\3 Git Projects\Medical Office\MedicalOffice\obj\Debug\net7.0\MedicalOffice.genruntimeconfig.cache
 D:\IT HELP\3 Git Projects\Medical Office\MedicalOffice\obj\Debug\net7.0\ref\MedicalOffice.dll
-D:\IT HELP\3 Git Projects\Medical Office\MedicalOffice\bin\Debug\net7.0\System.Formats.Asn1.dll
